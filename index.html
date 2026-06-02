@@ -331,7 +331,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     </div>
   </div>
 
-  <div class="sb-footer">Data: Jan – Jun 2026 (partial)<br>159 transactions · 4 accounts · 97 contracts</div>
+  <div class="sb-footer">Data: Jan – Jun 2026 (partial)<br>163 transactions · 4 accounts · 22 weeks</div>
 </aside>
 
 <!-- ══ MAIN ══ -->
@@ -467,31 +467,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
       <div style="height:150px;"><canvas id="dailyChart"></canvas></div>
     </div>
 
-    <!-- ── PER-CONTRACT BREAKDOWN ── -->
-    <div class="sec sec-anchor" id="sec-contracts">Per-Contract Performance</div>
-    <div class="card" style="margin-bottom:13px;">
-      <div class="ct-controls">
-        <input class="ct-search" id="ctSearch" type="text" placeholder="Search by symbol or underlying…" oninput="filterContracts()">
-        <span class="ct-count" id="ctCount">93 contracts</span>
-        <button class="show-all-btn" id="showAllBtn" onclick="toggleShowAll()">Show All</button>
+    <!-- ── WEEKLY P&L ── -->
+    <div class="sec sec-anchor" id="sec-contracts">Weekly P&amp;L</div>
+    <div class="row3" style="margin-bottom:13px;">
+      <div class="card">
+        <div class="card-hd"><div class="card-title">Weekly P&amp;L</div><div class="card-sub">Net gain per week · week starting Monday</div></div>
+        <div style="height:200px;"><canvas id="weeklyChart"></canvas></div>
+        <div class="strip">
+          <div class="strip-item"><div class="si-lbl">Avg/Week</div><div class="si-val green" id="wk-avg">—</div></div>
+          <div class="strip-item"><div class="si-lbl">Best Week</div><div class="si-val" id="wk-best">—</div></div>
+          <div class="strip-item"><div class="si-lbl">Worst Week</div><div class="si-val muted" id="wk-worst">—</div></div>
+        </div>
       </div>
-      <div class="ct-scroll">
-        <table class="c-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Symbol</th>
-              <th>Underlying</th>
-              <th>Expiry</th>
-              <th class="right">Qty</th>
-              <th class="right">Net P&amp;L</th>
-              <th class="right">Fees</th>
-              <th>Account</th>
-              <th>Traded</th>
-            </tr>
-          </thead>
-          <tbody id="ctBody"></tbody>
-        </table>
+      <div class="card">
+        <div class="card-hd"><div class="card-title">Cumulative Weekly Growth</div><div class="card-sub">Running total by week</div></div>
+        <div style="height:200px;"><canvas id="weeklyCumChart"></canvas></div>
+        <div class="strip">
+          <div class="strip-item"><div class="si-lbl">Winning Weeks</div><div class="si-val green" id="wk-win">—</div></div>
+          <div class="strip-item"><div class="si-lbl">Win Rate</div><div class="si-val green" id="wk-wr">—</div></div>
+        </div>
       </div>
     </div>
 
@@ -658,6 +652,12 @@ const DB = {
   }
 };
 
+const WEEKLY_DATA = {
+  labels:['1/5','1/12','1/19','1/26','2/2','2/9','2/16','2/23','3/2','3/9','3/16','3/23','3/30','4/6','4/13','4/20','4/27','5/4','5/11','5/18','5/25','6/1'],
+  pnl:[3467.24,5247.49,-265.06,700.50,7452.22,7684.53,2708.09,9242.19,9264.64,3154.15,10368.15,10090.26,3921.44,10399.54,9349.59,5375.29,12321.64,8015.98,5990.63,3989.61,15130.03,2049.00],
+  trades:[1,3,2,1,5,7,3,3,5,4,8,12,7,10,14,12,17,11,13,9,9,7]
+};
+
 const FORECAST = {
   actual:[9150.17,27087.03,37913.64,33387.13,36070.18,912.00],
   conservative:[28722,28722,28722,28722,28722,28722],
@@ -678,47 +678,7 @@ Chart.defaults.color='#8b95aa';
 Chart.defaults.font.family="-apple-system,'Inter',sans-serif";
 Chart.defaults.font.size=11;
 
-let charts={}, ctShowAll=false, ctAccount='All', ctQuery='';
-
-// ═══════════════════════════════════════
-// CONTRACT TABLE
-// ═══════════════════════════════════════
-function filterContracts(){
-  ctQuery = $('ctSearch').value.toLowerCase();
-  renderContracts(ctAccount);
-}
-
-function toggleShowAll(){
-  ctShowAll = !ctShowAll;
-  $('showAllBtn').textContent = ctShowAll ? 'Show Less' : 'Show All';
-  renderContracts(ctAccount);
-}
-
-function renderContracts(acct){
-  ctAccount = acct;
-  let rows = CONTRACTS.filter(c => acct==='All' || c[4].includes(acct));
-  if(ctQuery) rows = rows.filter(c => c[0].toLowerCase().includes(ctQuery)||c[1].toLowerCase().includes(ctQuery));
-  const display = ctShowAll ? rows : rows.slice(0,25);
-  $('ctCount').textContent = `${rows.length} contracts${rows.length!==display.length?' (showing '+display.length+')':''}`;
-  const maxPos = Math.max(...rows.filter(c=>c[2]>0).map(c=>c[2]),1);
-  $('ctBody').innerHTML = display.map((c,i)=>{
-    const [sym,name,pnl,fees,accounts,trades,open,close,expiry,qty,rollover]=c;
-    const pos=pnl>=0;
-    const clr=pos?'var(--green)':'var(--red)';
-    const sign=pos?'+':'-';
-    return `<tr>
-      <td class="rank-num">${i+1}</td>
-      <td class="mono">${rollover?'<span class="roll-badge" title="Part of a rollover chain — this contract was either rolled from or into another position">↻</span>':''}${sym}</td>
-      <td style="font-weight:600;">${name}</td>
-      <td>${expiry}</td>
-      <td class="right">${qty}</td>
-      <td class="right" style="font-weight:700;color:${clr};">${sign}${fmt(pnl,2).slice(1)}</td>
-      <td class="right" style="color:var(--muted);">$${fees.toFixed(2)}</td>
-      <td style="font-size:.68rem;">${accounts.join(', ')}</td>
-      <td style="color:var(--muted);font-size:.68rem;">${open}→${close}</td>
-    </tr>`;
-  }).join('');
-}
+let charts={};
 
 // ═══════════════════════════════════════
 // ROLLOVER LIST
@@ -811,7 +771,7 @@ function renderKPIs(d, acct){
   $('kpi-wr-sub').textContent=`${d.wd} of ${d.td} trading days`;
   $('kpi-prem').textContent=fmt(d.premium);
   $('kpi-trades').textContent=d.trades;
-  $('kpi-trades-sub').textContent=`transactions · ${CONTRACTS.filter(c=>acct==='All'||c[4].includes(acct)).length} contracts`;
+  $('kpi-trades-sub').textContent=`transactions · 22 active weeks`;
   $('kpi-fees').textContent=fmt(d.fees);
   $('kpi-fees-sub').textContent=((d.fees/d.premium)*100).toFixed(1)+'% of gross premium';
   $('kpi-best').textContent=fmt(d.bestVal);
@@ -865,6 +825,16 @@ function buildCharts(d){
   const dkeys=Object.keys(d.daily).sort();
   const dvals=dkeys.map(k=>d.daily[k]);
   charts.daily=new Chart($('dailyChart'),{type:'bar',data:{labels:dkeys.map(k=>{const dt=new Date(k+'T00:00:00');return(dt.getMonth()+1)+'/'+(dt.getDate());}),datasets:[{data:dvals,backgroundColor:dvals.map(v=>v>=0?'rgba(5,150,105,.65)':'rgba(220,38,38,.65)'),borderColor:dvals.map(v=>v>=0?'#059669':'#dc2626'),borderWidth:1,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{title:items=>dkeys[items[0].dataIndex],label:ctx=>' P&L: '+fmt(ctx.parsed.y,2)}}},scales:{x:{display:false},y:{grid:{color:gridC},border:{display:false},ticks:{callback:v=>v>=0?'$'+(v/1000).toFixed(0)+'k':'-$'+Math.abs(v/1000).toFixed(1)+'k'}}}}});
+
+  // Weekly P&L
+  const wPnl=WEEKLY_DATA.pnl; const wLbls=WEEKLY_DATA.labels;
+  charts.weekly=new Chart($('weeklyChart'),{type:'bar',data:{labels:wLbls,datasets:[{data:wPnl,backgroundColor:wPnl.map(v=>v>=0?'rgba(5,150,105,.7)':'rgba(220,38,38,.7)'),borderColor:wPnl.map(v=>v>=0?'#059669':'#dc2626'),borderWidth:1.5,borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{title:items=>'Week of '+wLbls[items[0].dataIndex],label:ctx=>' P&L: '+fmt(ctx.parsed.y,2)}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:9},maxRotation:45}},y:{grid:{color:gridC},border:{display:false},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}}}}});
+  const wCum=wPnl.reduce((a,v,i)=>{a.push((a[i-1]||0)+v);return a;},[]);
+  charts.weeklyCum=new Chart($('weeklyCumChart'),{type:'line',data:{labels:wLbls,datasets:[{data:wCum,borderColor:'#059669',borderWidth:2.5,tension:.35,pointBackgroundColor:'#059669',pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:3,pointHoverRadius:6,fill:true,backgroundColor:(ctx)=>{const{ctx:c,chartArea:ca}=ctx.chart;if(!ca)return'transparent';const g=c.createLinearGradient(0,ca.top,0,ca.bottom);g.addColorStop(0,'rgba(5,150,105,.16)');g.addColorStop(1,'rgba(5,150,105,.01)');return g;}}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{title:items=>'Week of '+wLbls[items[0].dataIndex],label:ctx=>' Cumulative: '+fmt(ctx.parsed.y,2)}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:9},maxRotation:45}},y:{grid:{color:gridC},border:{display:false},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}}}}});
+  const wWins=wPnl.filter(v=>v>0).length; const wAvg=wPnl.reduce((a,v)=>a+v,0)/wPnl.length;
+  const wBestIdx=wPnl.indexOf(Math.max(...wPnl)); const wWorstIdx=wPnl.indexOf(Math.min(...wPnl));
+  $('wk-avg').textContent=fmt(wAvg,0); $('wk-best').textContent=wLbls[wBestIdx]; $('wk-worst').textContent=wLbls[wWorstIdx];
+  $('wk-win').textContent=wWins+' / '+wPnl.length; $('wk-wr').textContent=Math.round(wWins/wPnl.length*100)+'%';
 }
 
 // ═══════════════════════════════════════
@@ -922,7 +892,6 @@ function setAccount(acct){
   // Render
   renderKPIs(d,acct);
   buildCharts(d);
-  renderContracts(acct);
   renderRollovers(acct);
   renderMonthlyStats(d);
   renderStratBars(d);
@@ -978,7 +947,7 @@ buildForecastChart();
     <span class="mn-ico">💰</span>P&amp;L
   </button>
   <button class="mn-btn" id="mn-contracts" onclick="mnScroll('sec-contracts','mn-contracts')">
-    <span class="mn-ico">📋</span>Trades
+    <span class="mn-ico">📅</span>Weekly
   </button>
   <button class="mn-btn" id="mn-forecast" onclick="mnScroll('sec-forecast','mn-forecast')">
     <span class="mn-ico">🎯</span>Forecast
