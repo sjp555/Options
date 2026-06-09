@@ -324,7 +324,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     </div>
   </div>
 
-  <div class="sb-footer">Data: Jan – Jun 8, 2026 (partial)<br>181 transactions · 4 accounts · 23 weeks</div>
+  <div class="sb-footer">Data: Jan – Jun 8, 2026 (partial)<br>230 records · 181 trades · 49 expirations<br>4 accounts · 23 weeks</div>
 </aside>
 
 <!-- ══ MAIN ══ -->
@@ -403,9 +403,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <p>May eclipsed March as the top month. YTD P&amp;L reached <strong>$158,629</strong> through Jun 8. At the current June pace (~$1,660/day), June is tracking toward <strong>$35K+</strong>.</p></div>
       </div>
       <div class="ins-card">
-        <div class="ins-ico" style="background:var(--green-bg);">📅</div>
-        <div class="ins-body"><h4>June Strong: $12,451 in 8 Days</h4>
-        <p>Jun 8 trades added <strong>$6,657</strong>: IBIT 06/12 36C STO (+$20,072), SOLZ 07/17 7C STO (+$1,783), COIN 06/12 180C STO (+$640), BTC 06/10 36C BTC (-$16,257), SQQQ STO (+$418).</p></div>
+        <div class="ins-ico" style="background:var(--teal-bg);">🎯</div>
+        <div class="ins-body"><h4>49 Contracts Expired Worthless</h4>
+        <p><strong>45%</strong> of all closing events were expirations — full premium retained on <strong>4,336 lots</strong>. IBIT led with <strong>25 expirations</strong>; March was peak month with <strong>16</strong>. IRA: 39, Brokerage: 10.</p></div>
       </div>
     </div>
 
@@ -511,7 +511,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     </div>
 
     <!-- ── ROLLOVER ACTIVITY ── -->
-    <div class="sec">Rollover Activity</div>
+    <div class="sec">Rollover &amp; Expiration Activity</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px;">
+      <div style="background:var(--teal-bg);border:1px solid rgba(8,145,178,.2);border-radius:13px;padding:15px 18px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:1.5rem;">🎯</div>
+        <div>
+          <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);font-weight:700;margin-bottom:4px;">Options Expired Worthless</div>
+          <div style="font-size:1.25rem;font-weight:800;color:var(--text);">49 <span style="font-size:.75rem;font-weight:600;color:var(--teal);">contracts</span></div>
+          <div style="font-size:.67rem;color:var(--text2);margin-top:3px;">4,336 total lots · 45% of all closures · IRA: 39, Brokerage: 10</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:13px 16px;">
+        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin-bottom:8px;">Expirations by Ticker</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:var(--amber-bg);color:var(--amber);padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;">IBIT ×25</span>
+          <span style="background:rgba(55,114,255,.1);color:#3772ff;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;">COIN ×11</span>
+          <span style="background:var(--purple-bg);color:var(--purple);padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;">SBET ×6</span>
+          <span style="background:rgba(98,126,234,.1);color:#627eea;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;">ETHA ×5</span>
+          <span style="background:var(--surface2);color:var(--muted);padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;">Other ×2</span>
+        </div>
+        <div style="margin-top:8px;font-size:.65rem;color:var(--muted);">March had most: 16 expirations · All premium retained</div>
+      </div>
+    </div>
     <div class="rv-kpis" style="margin-bottom:13px;">
       <div class="rv-kpi">
         <div class="rk-lbl">Rollovers Detected</div>
@@ -680,7 +701,7 @@ const DB = {
     tPnl:[104834.14,21672.69,8253.59,8237.90,4781.01,3895.23,2426.92,1567.00,1037.88,978.68,651.00,293.23],
     dLabels:['IRA','Brokerage','Roth IRA'],dData:[137754.05,19830.22,1045.00],
     dColors:['#059669','#6366f1','#f59e0b'],dCV:'87%',dCL:'IRA',dTitle:'Account Split',dSub:'P&L share by account',
-    actions:{'Sell to Open':120,'Buy to Close':59,'Sell to Close':1,'Buy to Open':1},
+    actions:{'Sell to Open':120,'Buy to Close':59,'Expired':49,'Sell to Close':1,'Buy to Open':1},
     daily:{"2026-01-06":3467.24,"2026-01-13":4683.15,"2026-01-14":564.34,"2026-01-21":3267.14,"2026-01-22":-3532.2,"2026-01-30":700.5,"2026-02-03":3850.5,"2026-02-04":1266.79,"2026-02-06":2334.93,"2026-02-11":6489.25,"2026-02-13":1195.28,"2026-02-17":-405.15,"2026-02-18":522.74,"2026-02-19":2590.5,"2026-02-23":3010.5,"2026-02-25":6231.69,"2026-03-02":1540.31,"2026-03-03":2170.31,"2026-03-04":5554.02,"2026-03-09":554.71,"2026-03-10":1462.1,"2026-03-13":1137.34,"2026-03-16":6343.15,"2026-03-17":4131.0,"2026-03-19":416.0,"2026-03-20":-522.0,"2026-03-23":6939.54,"2026-03-24":3850.0,"2026-03-26":98.36,"2026-03-27":-797.64,"2026-03-30":6610.44,"2026-03-31":-1574.0,"2026-04-01":-1115.0,"2026-04-06":5607.14,"2026-04-08":3918.73,"2026-04-10":873.67,"2026-04-13":3177.1,"2026-04-14":5424.41,"2026-04-16":-4026.48,"2026-04-17":4774.56,"2026-04-20":3147.71,"2026-04-22":424.33,"2026-04-23":2319.87,"2026-04-24":-516.62,"2026-04-27":2779.33,"2026-04-28":5076.28,"2026-04-29":2167.76,"2026-04-30":-645.66,"2026-05-01":2943.93,"2026-05-04":11349.99,"2026-05-05":1034.02,"2026-05-06":-186.63,"2026-05-07":-683.1,"2026-05-08":-928.66,"2026-05-11":4250.28,"2026-05-12":1549.98,"2026-05-13":1482.0,"2026-05-14":-336.99,"2026-05-15":-954.64,"2026-05-18":-732.0,"2026-05-20":4060.22,"2026-05-21":1522.97,"2026-05-22":-861.58,"2026-05-26":3356.25,"2026-05-28":5164.78,"2026-05-29":6609.0,"2026-06-01":2387.27,"2026-06-02":2373.73,"2026-06-03":-4721.48,"2026-06-04":1170.28,"2026-06-05":4584.94,"2026-06-08":6656.74},
     rv:26,rvCredits:48183,rvAvg:1853
   },
@@ -693,7 +714,7 @@ const DB = {
     tPnl:[97252.70,17603.40,8253.59,8237.90,3895.23,1567.00,651.00,293.23],
     dLabels:['Bitcoin','Coinbase','Ethereum','Sharplink','Others'],dData:[97252.70,17603.40,8253.59,8237.90,6407.46],
     dColors:['#f7931a','#3772ff','#627eea','#6366f1','#94a3b8'],dCV:'71%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of IRA P&L',
-    actions:{'Sell to Open':83,'Buy to Close':40,'Sell to Close':1,'Buy to Open':1},
+    actions:{'Sell to Open':83,'Buy to Close':40,'Expired':39,'Sell to Close':1,'Buy to Open':1},
     daily:{"2026-01-06":3467.24,"2026-01-13":4683.15,"2026-01-21":3267.14,"2026-01-22":-3532.2,"2026-01-30":700.5,"2026-02-03":3850.5,"2026-02-04":1266.79,"2026-02-06":1748.19,"2026-02-11":5454.51,"2026-02-13":981.69,"2026-02-19":2590.5,"2026-02-23":3010.5,"2026-02-25":6231.69,"2026-03-02":1540.31,"2026-03-03":2170.31,"2026-03-04":4551.31,"2026-03-10":1462.1,"2026-03-16":6343.15,"2026-03-17":4131.0,"2026-03-23":6218.54,"2026-03-24":3850.0,"2026-03-27":-1506.0,"2026-03-30":6610.44,"2026-03-31":-1574.0,"2026-04-06":5607.14,"2026-04-08":3427.73,"2026-04-10":1107.67,"2026-04-13":3177.1,"2026-04-14":5424.41,"2026-04-16":-4026.48,"2026-04-17":3447.56,"2026-04-20":2314.38,"2026-04-23":1296.66,"2026-04-27":1213.98,"2026-04-28":2291.3,"2026-04-29":2167.76,"2026-04-30":-645.66,"2026-05-01":2451.02,"2026-05-04":6210.71,"2026-05-05":1034.02,"2026-05-07":-683.1,"2026-05-11":491.0,"2026-05-12":1549.98,"2026-05-13":449.0,"2026-05-14":865.0,"2026-05-15":-345.98,"2026-05-18":-732.0,"2026-05-20":4060.22,"2026-05-21":1855.97,"2026-05-22":-852.47,"2026-05-26":3356.25,"2026-05-28":5164.78,"2026-05-29":3783.0,"2026-06-01":3222.27,"2026-06-02":3705.73,"2026-06-03":-4721.48,"2026-06-04":1170.28,"2026-06-05":5160.2,"2026-06-08":6238.74},
     rv:22,rvCredits:44469,rvAvg:2021
   },
@@ -717,7 +738,7 @@ const DB = {
     dLabels:['Bitcoin','Short QQQ','Coinbase','Amazon','Walmart','Apple'],
     dData:[6536.44,4781.01,4069.29,2426.92,1037.88,978.68],
     dColors:['#f7931a','#ef4444','#3772ff','#ff9900','#0071ce','#555'],dCV:'33%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of Brokerage P&L',
-    actions:{'Sell to Open':35,'Buy to Close':17},
+    actions:{'Sell to Open':35,'Buy to Close':17,'Expired':10},
     daily:{"2026-01-14":564.34,"2026-02-06":586.74,"2026-02-11":1034.74,"2026-02-13":213.59,"2026-02-17":-405.15,"2026-02-18":522.74,"2026-03-04":1002.71,"2026-03-09":554.71,"2026-03-13":1137.34,"2026-03-19":416.0,"2026-03-20":-522.0,"2026-03-23":721.0,"2026-03-26":98.36,"2026-03-27":708.36,"2026-04-01":-1115.0,"2026-04-08":491.0,"2026-04-10":-234.0,"2026-04-17":1327.0,"2026-04-20":833.33,"2026-04-22":424.33,"2026-04-23":1023.21,"2026-04-24":-516.62,"2026-04-27":1565.35,"2026-04-28":2784.98,"2026-05-01":492.91,"2026-05-04":5139.28,"2026-05-06":-186.63,"2026-05-08":-928.66,"2026-05-11":3759.28,"2026-05-14":-1201.99,"2026-05-15":-608.66,"2026-05-22":-9.11,"2026-05-29":1149.0,"2026-06-01":-835.0,"2026-06-05":-575.26,"2026-06-08":418.0},
     rv:3,rvCredits:3076.8,rvAvg:1026
   }
@@ -846,8 +867,8 @@ function renderMonthlyStats(d){
 function renderStratBars(d){
   const entries=Object.entries(d.actions).sort((a,b)=>b[1]-a[1]);
   const tot=Object.values(d.actions).reduce((s,v)=>s+v,0);
-  const cols=['#059669','#dc2626','#6366f1','#d97706'];
-  const tcols=['var(--green)','var(--red)','var(--purple)','var(--amber)'];
+  const cols=['#059669','#dc2626','#0891b2','#6366f1','#d97706'];
+  const tcols=['var(--green)','var(--red)','var(--teal)','var(--purple)','var(--amber)'];
   $('stratBars').innerHTML=entries.map(([name,cnt],i)=>{
     const pct=((cnt/tot)*100).toFixed(1);
     return `<div class="st-row">
