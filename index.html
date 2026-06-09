@@ -137,7 +137,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
 .rv-name{font-size:.72rem;font-weight:700;color:var(--text);width:72px;flex-shrink:0}
 .rv-acct{font-size:.62rem;color:var(--muted);width:50px;flex-shrink:0}
 .rv-arrow{flex:1;font-size:.63rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.rv-credit{font-size:.74rem;font-weight:700;color:var(--green);white-space:nowrap}
+.rv-credit{font-size:.74rem;font-weight:700;white-space:nowrap}
 
 /* ── FORECAST ── */
 .fc-scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
@@ -179,6 +179,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
 .st-fill{height:7px;border-radius:4px;transition:width 1s cubic-bezier(.16,1,.3,1)}
 .st-val{font-size:.7rem;font-weight:700;width:70px;text-align:right;flex-shrink:0}
 
+/* ── DTE BADGES ── */
+.dte-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.65rem;font-weight:700}
+.dte-red{background:var(--red-bg);color:var(--red)}
+.dte-amber{background:var(--amber-bg);color:var(--amber)}
+.dte-green{background:var(--green-bg);color:var(--green)}
+.dte-gray{background:var(--surface2);color:var(--muted)}
+
+/* ── ACTIVE CONTRACTS SUMMARY ── */
+.ac-summary{display:flex;gap:20px;margin-bottom:14px;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border);flex-wrap:wrap}
+.ac-sum-item .asl{font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600}
+.ac-sum-item .asv{font-size:.95rem;font-weight:800;margin-top:2px}
+
+/* ── TICKER TABLE ── */
+.tt-row{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--surface2)}
+.tt-row:last-child{border-bottom:none}
+.tt-row:hover{background:var(--surface2);border-radius:6px}
+.tt-rank{font-size:.65rem;color:var(--muted);width:16px;flex-shrink:0;text-align:right}
+.tt-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tt-name{flex:1;font-size:.78rem;font-weight:600;color:var(--text)}
+.tt-pnl{font-size:.82rem;font-weight:700;width:90px;text-align:right;flex-shrink:0}
+.tt-pct{font-size:.68rem;color:var(--muted);width:38px;text-align:right;flex-shrink:0}
+.tt-bar{flex:1;max-width:90px;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;border:1px solid var(--border)}
+.tt-bar-fill{height:5px;border-radius:3px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+.tt-header{display:flex;align-items:center;gap:8px;padding:0 4px 6px;border-bottom:1px solid var(--border);margin-bottom:2px}
+.tt-header span{font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:600}
+
 /* ── MISC ── */
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.6rem;font-weight:700}
 .bg-green{background:var(--green-bg);color:var(--green)}
@@ -198,61 +224,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
 /* ── MOBILE RESPONSIVE ── */
 @media(max-width:768px){
   body{flex-direction:column;overflow:auto;height:auto;min-height:100vh;padding-bottom:70px}
-
-  /* Hide desktop sidebar */
   .sidebar{display:none}
-
-  /* Main fills full width */
   .main{overflow-y:visible;height:auto}
-
-  /* Topbar compact */
   .topbar{padding:10px 16px;position:sticky;top:0;z-index:50}
   .tb-title{font-size:.82rem}
   .tb-sub{display:none}
   .tb-badge{font-size:.65rem;padding:3px 10px}
-
-  /* Content padding */
   .content{padding:14px 14px}
-
-  /* KPI: 2 columns */
   .kpi-grid{grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:14px}
   .kpi-val{font-size:1.25rem}
-
-  /* Insights: 1 column */
   .ins-grid{grid-template-columns:1fr;gap:9px;margin-bottom:14px}
-
-  /* Row layouts → single column */
   .row2,.row3{grid-template-columns:1fr;gap:9px}
   .span2{grid-column:span 1}
-
-  /* Forecast scenarios: 1 col */
   .fc-scenarios{grid-template-columns:1fr;gap:9px}
   .fc-val{font-size:1.35rem}
-
-  /* Rollover KPIs: 3 col stays but smaller */
   .rv-kpis{gap:7px}
   .rv-kpi .rk-val{font-size:1.1rem}
-
-  /* Charts: taller on mobile for readability */
   .main [style*="height:200px"]{height:180px!important}
   .main [style*="height:220px"]{height:200px!important}
   .main [style*="height:260px"]{height:220px!important}
   .main [style*="height:280px"]{height:220px!important}
-
-  /* Contract table: allow horizontal scroll */
   .ct-scroll{-webkit-overflow-scrolling:touch}
-
-  /* Heatmap cells: slightly smaller */
   .hm-day{width:24px;height:24px;border-radius:5px}
-
-  /* Bottom nav visible */
   .mobile-nav{
-    display:flex;
-    position:fixed;bottom:0;left:0;right:0;
-    background:var(--surface);
-    border-top:1px solid var(--border);
-    z-index:100;
-    padding-bottom:env(safe-area-inset-bottom);
+    display:flex;position:fixed;bottom:0;left:0;right:0;
+    background:var(--surface);border-top:1px solid var(--border);
+    z-index:100;padding-bottom:env(safe-area-inset-bottom);
     box-shadow:0 -2px 12px rgba(0,0,0,.06);
   }
   .mn-btn{
@@ -264,12 +261,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
   .mn-btn .mn-ico{font-size:1.1rem;line-height:1}
   .mn-btn.active{color:var(--green)}
   .mn-btn.active .mn-ico{filter:drop-shadow(0 0 4px rgba(5,150,105,.4))}
-
-  /* Section scroll targeting */
   .sec-anchor{scroll-margin-top:56px}
 }
-
-/* Safe area for notched phones (iOS) */
 @supports(padding:max(0px)){
   .topbar{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
   .content{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
@@ -293,7 +286,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <div class="acct-ico" style="background:#ecfdf5;">📊</div>
         <div><div class="acct-name">All Accounts</div><div class="acct-sub">Combined view</div></div>
       </div>
-      <div class="acct-pnl">$144,520</div>
+      <div class="acct-pnl">$158,629</div>
     </button>
 
     <button class="acct-btn" onclick="setAccount('IRA')" id="btn-IRA">
@@ -301,7 +294,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <div class="acct-ico" style="background:#eff6ff;">🏦</div>
         <div><div class="acct-name">IRA</div><div class="acct-sub">Tax-deferred</div></div>
       </div>
-      <div class="acct-pnl">$127,194</div>
+      <div class="acct-pnl">$137,754</div>
     </button>
 
     <button class="acct-btn" onclick="setAccount('Roth IRA')" id="btn-RothIRA">
@@ -317,7 +310,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <div class="acct-ico" style="background:#eef2ff;">💼</div>
         <div><div class="acct-name">Brokerage</div><div class="acct-sub">Taxable account</div></div>
       </div>
-      <div class="acct-pnl">$16,281</div>
+      <div class="acct-pnl">$19,830</div>
     </button>
   </div>
 
@@ -325,13 +318,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     <div class="sb-qs">
       <div class="sb-qs-title">Quick Stats</div>
       <div class="qs-row"><span class="qs-lbl">Win Rate</span><span class="qs-val green" id="qs-wr">76%</span></div>
-      <div class="qs-row"><span class="qs-lbl">Total Trades</span><span class="qs-val" id="qs-trades">358</span></div>
+      <div class="qs-row"><span class="qs-lbl">Total Trades</span><span class="qs-val" id="qs-trades">181</span></div>
       <div class="qs-row"><span class="qs-lbl">Best Month</span><span class="qs-val purple" id="qs-best">May</span></div>
-      <div class="qs-row"><span class="qs-lbl">Avg / Month</span><span class="qs-val green" id="qs-avg">$29,236</span></div>
+      <div class="qs-row"><span class="qs-lbl">Avg / Month</span><span class="qs-val green" id="qs-avg">$26,438</span></div>
     </div>
   </div>
 
-  <div class="sb-footer">Data: Jan – Jun 2026 (partial)<br>163 transactions · 4 accounts · 22 weeks</div>
+  <div class="sb-footer">Data: Jan – Jun 8, 2026 (partial)<br>181 transactions · 4 accounts · 23 weeks</div>
 </aside>
 
 <!-- ══ MAIN ══ -->
@@ -339,9 +332,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
   <div class="topbar">
     <div>
       <div class="tb-title" id="tb-title">All Accounts</div>
-      <div class="tb-sub" id="tb-sub">January – May 2026 · 156 transactions</div>
+      <div class="tb-sub" id="tb-sub">January – June 2026 · 181 transactions</div>
     </div>
-    <div class="tb-badge" id="tb-badge">YTD +$143,608</div>
+    <div class="tb-badge" id="tb-badge">YTD +$158,629</div>
   </div>
 
   <div class="content">
@@ -351,28 +344,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     <div class="kpi-grid" style="margin-bottom:20px;">
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Net P&amp;L</div><div class="kpi-ico" style="background:var(--green-bg);">💰</div></div>
-        <div class="kpi-val green" id="kpi-pnl">$146,178</div>
+        <div class="kpi-val green" id="kpi-pnl">$158,629</div>
         <div class="kpi-sub" id="kpi-pnl-sub">YTD net gain · all accounts</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Win Rate</div><div class="kpi-ico" style="background:var(--purple-bg);">🎯</div></div>
         <div class="kpi-val purple" id="kpi-wr">76%</div>
-        <div class="kpi-sub" id="kpi-wr-sub">48 of 64 days profitable</div>
+        <div class="kpi-sub" id="kpi-wr-sub">55 of 72 days profitable</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Premium Collected</div><div class="kpi-ico" style="background:var(--amber-bg);">📤</div></div>
-        <div class="kpi-val" style="color:var(--amber);" id="kpi-prem">$340,165</div>
+        <div class="kpi-val" style="color:var(--amber);" id="kpi-prem">$394,825</div>
         <div class="kpi-sub">Gross Sell-to-Open proceeds</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Contracts Traded</div><div class="kpi-ico" style="background:var(--blue-bg);">🔄</div></div>
-        <div class="kpi-val" style="color:var(--blue);" id="kpi-trades">358</div>
-        <div class="kpi-sub" id="kpi-trades-sub">Across 93 unique contracts</div>
+        <div class="kpi-val" style="color:var(--blue);" id="kpi-trades">181</div>
+        <div class="kpi-sub" id="kpi-trades-sub">Across 23 active weeks</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Total Fees</div><div class="kpi-ico" style="background:var(--red-bg);">💸</div></div>
-        <div class="kpi-val red" id="kpi-fees">$7,538</div>
-        <div class="kpi-sub" id="kpi-fees-sub">2.3% of gross premium</div>
+        <div class="kpi-val red" id="kpi-fees">$8,192</div>
+        <div class="kpi-sub" id="kpi-fees-sub">2.1% of gross premium</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top"><div class="kpi-lbl">Best Month</div><div class="kpi-ico" style="background:var(--green-bg);">🏆</div></div>
@@ -381,38 +374,71 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
       </div>
     </div>
 
-    <!-- ── KEY INSIGHTS (moved here) ── -->
+    <!-- ── KEY INSIGHTS ── -->
     <div class="sec">Key Insights</div>
     <div class="ins-grid" style="margin-bottom:20px;">
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--amber-bg);">₿</div>
-        <div class="ins-body"><h4>Bitcoin Dominates Returns</h4>
-        <p>IBIT calls generated <strong>$93,380</strong> — <strong>66%</strong> of total P&amp;L. Two contracts alone (March &amp; Feb) netted <strong>$66,471</strong> combined on 210-lot size.</p></div>
+        <div class="ins-body"><h4>Bitcoin Still Dominates</h4>
+        <p>IBIT calls generated <strong>$104,834</strong> — <strong>66%</strong> of total P&amp;L. The IBIT 03/13 41C alone netted <strong>$37,210</strong> on a 210-lot in a single week.</p></div>
       </div>
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--purple-bg);">↻</div>
-        <div class="ins-body"><h4>Rollovers Captured $32K</h4>
-        <p><strong>19 rollover events</strong> collected <strong>$31,815</strong> in net credits by closing near-expiry positions and re-opening at later strikes — a key income-extension tactic.</p></div>
+        <div class="ins-body"><h4>Rollovers Captured $48K</h4>
+        <p><strong>26 rollover events</strong> collected <strong>$48,183</strong> in net credits — averaging <strong>$1,853 per roll</strong>. Jun 5 IBIT roll alone added $5,160 in one day.</p></div>
       </div>
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--green-bg);">⚡</div>
-        <div class="ins-body"><h4>Premium Capture Rate: 41%</h4>
-        <p>You collected <strong>$340,165</strong> gross and retained <strong>$146,178</strong> — a 43% net keep rate after buybacks and fees. Covered calls on IBIT carried the largest premium volume.</p></div>
+        <div class="ins-body"><h4>Premium Capture Rate: 40%</h4>
+        <p>You collected <strong>$394,825</strong> gross and retained <strong>$158,629</strong> — a 40% net keep rate after buybacks and fees. Covered calls on IBIT carried the largest premium volume.</p></div>
       </div>
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--blue-bg);">🏦</div>
-        <div class="ins-body"><h4>IRA Powers 85% of Returns</h4>
-        <p>The IRA generated <strong>$127,194</strong> through large-lot IBIT/COIN/SOLZ strategies. The <strong>Roth IRA</strong> is at <strong>$1,045</strong> after a June BTC on IBIT 10/16 reduced gains from the $2,377 May high.</p></div>
+        <div class="ins-body"><h4>IRA Powers 87% of Returns</h4>
+        <p>The IRA generated <strong>$137,754</strong> through large-lot IBIT/COIN/SOLZ strategies. Brokerage added <strong>$19,830</strong> — best May ever at <strong>$7,605</strong>.</p></div>
       </div>
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--teal-bg);">📈</div>
-        <div class="ins-body"><h4>Accelerating Monthly Growth</h4>
-        <p>YTD P&amp;L is <strong>$144,520</strong> across 6 months. June turned positive at <strong>+$912</strong> after 7 trades. Best month remains March at $37,914. Year-end base case projection: <strong>$322K</strong>.</p></div>
+        <div class="ins-body"><h4>May Was Best Month: $38,640</h4>
+        <p>May eclipsed March as the top month. YTD P&amp;L reached <strong>$158,629</strong> through Jun 8. At the current June pace (~$1,660/day), June is tracking toward <strong>$35K+</strong>.</p></div>
       </div>
       <div class="ins-card">
         <div class="ins-ico" style="background:var(--green-bg);">📅</div>
-        <div class="ins-body"><h4>June Now Positive · 4 New Trades on Jun 2</h4>
-        <p>June turned green at <strong>+$912</strong> after 4 new Jun 2 trades: IBIT 40C STO (+$3,483), COIN 185C STO (+$1,065), IBIT 42C BTC (-$843), IBIT 10/16 47C BTC (-$1,332). IRA up $4,216; Roth IRA -$1,332. May remains 2nd-best month at <strong>$36,070</strong>.</p></div>
+        <div class="ins-body"><h4>June Strong: $12,451 in 8 Days</h4>
+        <p>Jun 8 trades added <strong>$6,657</strong>: IBIT 06/12 36C STO (+$20,072), SOLZ 07/17 7C STO (+$1,783), COIN 06/12 180C STO (+$640), BTC 06/10 36C BTC (-$16,257), SQQQ STO (+$418).</p></div>
+      </div>
+    </div>
+
+    <!-- ── ACTIVE OPEN CONTRACTS ── -->
+    <div class="sec sec-anchor" id="sec-active">Active Open Contracts</div>
+    <div class="ac-summary" style="margin-bottom:8px;">
+      <div class="ac-sum-item"><div class="asl">Open Positions</div><div class="asv" id="ac-count">8</div></div>
+      <div class="ac-sum-item"><div class="asl">Expiring ≤7 Days</div><div class="asv red" id="ac-expiring">4</div></div>
+      <div class="ac-sum-item"><div class="asl">Net Collected (open)</div><div class="asv green" id="ac-collected">$40,578</div></div>
+      <div class="ac-sum-item"><div class="asl">Net P&amp;L (open legs)</div><div class="asv green" id="ac-pnl">$40,524</div></div>
+    </div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-hd" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div><div class="card-title">Open Option Positions — as of Jun 8, 2026</div><div class="card-sub">Sorted by DTE · hover rolled badge for details · IRA / Brokerage color-coded</div></div>
+      </div>
+      <div class="ct-scroll">
+        <table class="c-table" id="acTableEl">
+          <thead>
+            <tr>
+              <th>Underlying</th>
+              <th>Contract</th>
+              <th>Acct</th>
+              <th class="right">Qty</th>
+              <th class="right">Opened</th>
+              <th class="right">Expiry</th>
+              <th class="right">DTE</th>
+              <th class="right">Net Collected</th>
+              <th class="right">Net P&amp;L</th>
+              <th class="right">Status</th>
+            </tr>
+          </thead>
+          <tbody id="acTable"></tbody>
+        </table>
       </div>
     </div>
 
@@ -423,8 +449,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <div class="card-hd"><div class="card-title">Monthly P&amp;L</div><div class="card-sub">Net gain per calendar month</div></div>
         <div style="height:200px;"><canvas id="monthlyChart"></canvas></div>
         <div class="strip">
-          <div class="strip-item"><div class="si-lbl">Avg/Month</div><div class="si-val green" id="ms-avg">$28,722</div></div>
-          <div class="strip-item"><div class="si-lbl">Best</div><div class="si-val" id="ms-best">March</div></div>
+          <div class="strip-item"><div class="si-lbl">Avg/Month</div><div class="si-val green" id="ms-avg">$26,438</div></div>
+          <div class="strip-item"><div class="si-lbl">Best</div><div class="si-val" id="ms-best">May</div></div>
           <div class="strip-item"><div class="si-lbl">Slowest</div><div class="si-val muted" id="ms-slow">January</div></div>
         </div>
       </div>
@@ -432,34 +458,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
         <div class="card-hd"><div class="card-title">Cumulative Growth</div><div class="card-sub">Running YTD total</div></div>
         <div style="height:200px;"><canvas id="cumChart"></canvas></div>
         <div class="strip">
-          <div class="strip-item"><div class="si-lbl">YTD Total</div><div class="si-val green" id="cum-total">+$146,178</div></div>
+          <div class="strip-item"><div class="si-lbl">YTD Total</div><div class="si-val green" id="cum-total">+$158,629</div></div>
         </div>
       </div>
     </div>
 
-    <div class="row2" style="margin-bottom:13px;">
-      <div class="card" style="grid-column:span 2;">
-        <div class="card-hd" style="display:flex;align-items:center;justify-content:space-between;">
-          <div><div class="card-title">P&amp;L by Underlying</div><div class="card-sub">Net contribution per ticker</div></div>
-        </div>
-        <div style="height:190px;"><canvas id="tickerChart"></canvas></div>
+    <div class="card" style="margin-bottom:13px;">
+      <div class="card-hd" style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="card-title">P&amp;L by Underlying</div><div class="card-sub">Net contribution per ticker · ranked by performance</div></div>
       </div>
+      <div class="tt-header">
+        <span style="width:16px"></span>
+        <span style="width:10px"></span>
+        <span style="flex:1">Ticker</span>
+        <span style="width:90px;text-align:right">Net P&amp;L</span>
+        <span style="width:38px;text-align:right">Share</span>
+        <span style="flex:1;max-width:90px"></span>
+      </div>
+      <div id="tickerTable"></div>
     </div>
 
-    <div class="row2" style="margin-bottom:13px;">
-      <div class="card">
-        <div class="card-hd" style="display:flex;align-items:center;justify-content:space-between;">
-          <div><div class="card-title" id="donut-title">Account Split</div><div class="card-sub" id="donut-sub">P&amp;L share by account</div></div>
-        </div>
-        <div class="donut-wrap" style="height:160px;position:relative;">
-          <canvas id="donutChart"></canvas>
-          <div class="d-center"><div class="d-big" id="d-val">85%</div><div class="d-sm" id="d-lbl">IRA</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-hd"><div class="card-title">Trade Activity &amp; Fees</div><div class="card-sub">Monthly trades vs. commissions</div></div>
-        <div style="height:160px;"><canvas id="activityChart"></canvas></div>
-      </div>
+    <div class="card" style="margin-bottom:13px;">
+      <div class="card-hd"><div class="card-title">Trade Activity &amp; Fees</div><div class="card-sub">Monthly trades vs. commissions</div></div>
+      <div style="height:160px;"><canvas id="activityChart"></canvas></div>
     </div>
 
     <div class="card" style="margin-bottom:13px;">
@@ -494,22 +515,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     <div class="rv-kpis" style="margin-bottom:13px;">
       <div class="rv-kpi">
         <div class="rk-lbl">Rollovers Detected</div>
-        <div class="rk-val purple" id="rv-count">17</div>
+        <div class="rk-val purple" id="rv-count">26</div>
         <div class="rk-sub" id="rv-count-sub">across all accounts</div>
       </div>
       <div class="rv-kpi">
         <div class="rk-lbl">Total Rollover Credits</div>
-        <div class="rk-val green" id="rv-credits">$28,024</div>
+        <div class="rk-val green" id="rv-credits">$48,183</div>
         <div class="rk-sub">net received on roll days</div>
       </div>
       <div class="rv-kpi">
         <div class="rk-lbl">Avg Credit / Roll</div>
-        <div class="rk-val" style="color:var(--teal);" id="rv-avg">$1,648</div>
+        <div class="rk-val" style="color:var(--teal);" id="rv-avg">$1,853</div>
         <div class="rk-sub">premium captured per event</div>
       </div>
     </div>
     <div class="card" style="margin-bottom:13px;">
-      <div class="card-hd"><div class="card-title">Rollover Event Log</div><div class="card-sub">BTC + STO same day on same underlying with later expiry — <span class="badge bg-purple">↻</span> in contract table marks these</div></div>
+      <div class="card-hd"><div class="card-title">Rollover Event Log</div><div class="card-sub">BTC + STO same day on same underlying — <span class="badge bg-purple">↻</span> marks rollover positions</div></div>
       <div class="rv-list" id="rvList"></div>
     </div>
 
@@ -518,34 +539,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
     <div class="fc-scenarios" style="margin-bottom:13px;">
       <div class="fc-card conservative">
         <div class="fc-badge" style="background:#f1f5f9;color:#64748b;">Conservative</div>
-        <div class="fc-val" style="color:#475569;" id="fc-cons">$344,660</div>
-        <div class="fc-sub">Based on simple monthly avg ($28,722)</div>
+        <div class="fc-val" style="color:#475569;" id="fc-cons">$317,257</div>
+        <div class="fc-sub">Based on simple monthly avg ($26,438)</div>
         <div class="fc-meta">
-          <div class="fc-meta-item"><div class="fmi-lbl">Jun–Dec avg</div><div class="fmi-val" id="fc-cons-avg">$28,722</div></div>
-          <div class="fc-meta-item"><div class="fmi-lbl">Remaining</div><div class="fmi-val">7 months</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">Jul–Dec avg</div><div class="fmi-val" id="fc-cons-avg">$26,438</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">Remaining</div><div class="fmi-val">6 months</div></div>
         </div>
       </div>
       <div class="fc-card base">
         <div class="fc-badge" style="background:var(--green-bg);color:var(--green);">Base Case</div>
-        <div class="fc-val green" id="fc-base">$346,692</div>
+        <div class="fc-val green" id="fc-base">$326,629</div>
         <div class="fc-sub">Weighted avg (recent months favored)</div>
         <div class="fc-meta">
-          <div class="fc-meta-item"><div class="fmi-lbl">Jun–Dec avg</div><div class="fmi-val green" id="fc-base-avg">$29,589</div></div>
-          <div class="fc-meta-item"><div class="fmi-lbl">vs. YTD</div><div class="fmi-val green">+10%</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">Jul–Dec avg</div><div class="fmi-val green" id="fc-base-avg">$28,000</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">vs. YTD</div><div class="fmi-val green">+6%</div></div>
         </div>
       </div>
       <div class="fc-card optimistic">
         <div class="fc-badge" style="background:var(--purple-bg);color:var(--purple);">Optimistic</div>
-        <div class="fc-val purple" id="fc-opt">$465,485</div>
-        <div class="fc-sub">Trend-based (+$5,206/month growth)</div>
+        <div class="fc-val purple" id="fc-opt">$396,629</div>
+        <div class="fc-sub">Trend-based (+$3,000/month growth)</div>
         <div class="fc-meta">
-          <div class="fc-meta-item"><div class="fmi-lbl">Dec target</div><div class="fmi-val purple">$74,769</div></div>
-          <div class="fc-meta-item"><div class="fmi-lbl">Growth slope</div><div class="fmi-val purple">+$5,206/mo</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">Dec target</div><div class="fmi-val purple">$48,000</div></div>
+          <div class="fc-meta-item"><div class="fmi-lbl">Growth slope</div><div class="fmi-val purple">+$3K/mo</div></div>
         </div>
       </div>
     </div>
     <div class="card" style="margin-bottom:13px;">
-      <div class="card-hd"><div class="card-title">Monthly P&amp;L Projection — Full Year</div><div class="card-sub">Actual (Jan–Jun) · Projected (Jul–Dec) — three scenario lines overlaid</div></div>
+      <div class="card-hd"><div class="card-title">Monthly P&amp;L Projection — Full Year</div><div class="card-sub">Actual (Jan–Jun partial) · Projected (Jul–Dec) — three scenario lines overlaid</div></div>
       <div style="height:220px;"><canvas id="forecastChart"></canvas></div>
     </div>
 
@@ -593,78 +614,113 @@ const TICKER_COLORS = {
   'Circle':'#00d4aa','Microsoft':'#00a4ef','Microstrategy':'#e85d00','Others':'#94a3b8'
 };
 
-const CONTRACTS = [["IBIT 03/13/2026 41.00 C","Bitcoin",37210.31,139.69,["IRA"],1,"03/04","03/04","03/13/26",210,true],["IBIT 02/27/2026 38.00 C","Bitcoin",29260.5,139.5,["IRA"],1,"02/25","02/25","02/27/26",210,true],["IBIT 06/05/2026 47.50 C","Bitcoin",17948.65,279.35,["IRA"],2,"05/05","05/15","06/05/26",210,true],["IBIT 05/20/2026 45.00 C","Bitcoin",12363.02,278.98,["IRA"],2,"05/15","05/18","05/20/26",210,false],["IBIT 04/20/2026 42.50 C","Bitcoin",11375.87,279.13,["IRA"],3,"04/14","04/20","04/20/26",210,true],["IBIT 05/01/2026 45.00 C","Bitcoin",8844.44,293.56,["Brokerage","IRA"],3,"04/20","04/28","05/01/26",210,true],["IBIT 03/18/2026 43.50 C","Bitcoin",7771.31,418.38,["IRA"],3,"03/16","03/17","03/18/26",210,false],["IBIT 02/18/2026 40.50 C","Bitcoin",7420.5,139.5,["IRA"],1,"02/13","02/13","02/18/26",210,true],["AAPL 06/18/2026 290.00 C","Apple",4507.92,4.08,["Brokerage"],1,"05/01","05/01","06/18/26",6,true],["IBIT 04/10/2026 41.50 C","Bitcoin",4107.23,168.97,["Brokerage","IRA"],3,"04/08","04/10","04/10/26",210,true],["IBIT 05/22/2026 44.50 C","Bitcoin",4060.22,139.78,["IRA"],1,"05/20","05/20","05/22/26",210,false],["IBIT 03/27/2026 41 C","Bitcoin",3850,139.69,["IRA"],1,"03/24","03/24","03/27/26",210,false],["IBIT 05/29/2026 44.00 C","Bitcoin",3270.23,89.77,["IRA"],2,"05/26","05/28","05/29/26",210,true],["SOLZ 01/15/2027 10.00 C","Solana",3783,16.69,["IRA"],1,"05/29","","01/15/27",40,true],["COIN 06/18/2026 200.00 C","Coinbase",204.97,5.03,["IRA"],2,"05/28","06/01","06/18/26",6,false],["IBIT 10/16/2026 47.00 C","Bitcoin",345,5.81,["Roth IRA"],2,"05/29","06/02","10/16/26",7,false],["IBIT 06/05/2026 42.00 C","Bitcoin",2640.24,89.76,["IRA"],2,"06/01","06/02","06/05/26",210,false],["IBIT 06/05/2026 40.00 C","Bitcoin",3482.74,87.26,["IRA"],1,"06/02","","06/05/26",210,false],["COIN 06/05/2026 185.00 C","Coinbase",1065.49,2.51,["IRA"],1,"06/02","","06/05/26",6,false],["COIN 07/02/2026 200.00 C","Coinbase",-823,0.84,["Brokerage"],2,"05/29","06/01","07/02/26",1,false],["IBIT 05/29/2026 42.50 C","Bitcoin",1172.78,87.22,["IRA"],1,"05/28","05/28","05/29/26",210,false],["SBET 06/12/2026 6.50 C","Sharplink",1237.06,24.94,["IRA"],1,"05/28","05/28","06/12/26",60,false],["IBIT 01/16/2026 55.00 C","Bitcoin",3667.14,132.86,["IRA"],1,"01/13","01/13","01/16/26",200,false],["IBIT 02/06/2026 46.00 C","Bitcoin",3638.19,141.81,["IRA"],2,"02/03","02/06","02/06/26",210,true],["IBIT 04/29/2026 43.50 C","Bitcoin",3637.73,142.27,["IRA"],2,"04/28","04/29","04/29/26",210,true],["IBIT 01/09/2026 54.50 C","Bitcoin",3467.24,132.76,["IRA"],1,"01/06","01/06","01/09/26",200,false],["COIN 04/24/2026 222.50 C","Coinbase",3163.94,4.06,["IRA"],1,"04/17","04/17","04/24/26",6,false],["IBIT 02/20/2026 39.00 C","Bitcoin",3113.24,160.76,["Brokerage","IRA"],2,"02/18","02/19","02/20/26",210,false],["SQQQ 05/08/2026 95.00 C","Short QQQ",2708.67,6.64,["Brokerage"],2,"03/27","04/01","05/08/26",5,true],["COIN 05/08/2026 220.00 C","Coinbase",2623.96,4.04,["IRA"],1,"05/04","05/04","05/08/26",6,false],["COIN 06/18/2026 220.00 C","Coinbase",2175.96,2.04,["Brokerage"],3,"05/04","05/08","06/18/26",1,false],["IBIT 04/02/2026 40.50 C","Bitcoin",2170.31,139.69,["IRA"],1,"03/30","03/30","04/02/26",210,false],["AMZN 05/01/2026 275.00 C","Amazon",2115.94,4.08,["Brokerage"],3,"04/28","05/01","05/01/26",3,false],["IBIT 02/09/2026 43.00 C","Bitcoin",1960.5,139.5,["IRA"],1,"02/06","02/06","02/09/26",210,true],["IBIT 02/18/2026 39.50 C","Bitcoin",1909.59,42.41,["Brokerage"],2,"02/13","02/17","02/18/26",32,true],["SQQQ 05/15/2026 54.00 C","Short QQQ",1848.03,13.97,["Brokerage"],3,"05/04","05/06","05/15/26",7,false],["SBET 05/15/2026 8.00 C","Sharplink",1820.05,39.95,["IRA"],1,"05/04","05/04","05/15/26",60,false],["IBIT 04/08/2026 41.00 C","Bitcoin",1747.81,142.19,["IRA"],2,"04/06","04/08","04/08/26",210,true],["SOLZ 04/17/2026 9.00 C","Solana",1747.39,53.09,["IRA"],2,"03/23","03/27","04/17/26",40,false],["COIN 05/15/2026 220.00 C","Coinbase",1549.98,4.02,["IRA"],1,"05/12","05/12","05/15/26",6,false],["IBIT 03/02/2026 40.00 C","Bitcoin",1540.31,139.69,["IRA"],1,"03/02","03/02","03/02/26",210,false],["COIN 05/22/2026 190.00 C","Coinbase",1379.5,6.5,["IRA"],2,"05/21","05/22","05/22/26",6,false],["IBIT 04/24/2026 45.50 C","Bitcoin",1327,14.66,["Brokerage"],1,"04/17","04/17","04/24/26",22,false],["ETHA 02/06/2026 17.00 C","Ethereum",1266.79,33.21,["IRA"],1,"02/04","02/04","02/06/26",50,false],["ETHA 04/02/2026 16.00 C","Ethereum",1266.74,33.26,["IRA"],1,"03/30","03/30","04/02/26",50,false],["COIN 05/01/2026 215.00 C","Coinbase",1213.98,4.02,["IRA"],1,"04/27","04/27","05/01/26",6,false],["COIN 02/13/2026 167.50 C","Coinbase",1184.01,3.99,["IRA"],1,"02/11","02/11","02/13/26",6,false],["SBET 05/01/2026 7.50 C","Sharplink",1100.07,39.93,["IRA"],1,"04/28","04/28","05/01/26",60,false],["ETHA 05/15/2026 18.50 C","Ethereum",1083.6,66.4,["IRA"],2,"05/04","05/07","05/15/26",50,false],["ETHA 04/24/2026 20.00 C","Ethereum",1066.72,33.28,["IRA"],1,"04/17","04/17","04/24/26",50,true],["COIN 03/27/2026 217.50 C","Coinbase",1058.01,3.99,["IRA"],1,"03/23","03/23","03/27/26",6,false],["SBET 03/20/2026 8.50 C","Sharplink",1040.09,39.91,["IRA"],1,"03/16","03/16","03/20/26",60,false],["SBET 04/24/2026 8.00 C","Sharplink",1040.07,39.93,["IRA"],1,"04/20","04/20","04/24/26",60,false],["WMT 05/22/2026 135.00 C","Walmart",1037.88,6.12,["Brokerage"],2,"05/11","05/22","05/22/26",9,false],["COIN 01/16/2026 270.00 C","Coinbase",1016.01,3.99,["IRA"],1,"01/13","01/13","01/16/26",6,false],["IBIT 03/06/2026 43.00 C","Bitcoin",1002.71,21.29,["Brokerage"],1,"03/04","03/04","03/06/26",32,false],["COIN 03/20/2026 220.00 C","Coinbase",896.01,3.99,["IRA"],1,"03/16","03/16","03/20/26",6,false],["COIN 04/17/2026 205.00 C","Coinbase",886.03,7.96,["IRA"],2,"03/31","04/10","04/17/26",6,false],["SQQQ 04/24/2026 60.00 C","Short QQQ",813.21,6.79,["Brokerage"],2,"04/20","04/23","04/24/26",10,true],["ETHA 03/20/2026 18.50 C","Ethereum",766.74,33.26,["IRA"],1,"03/16","03/16","03/20/26",50,false],["SBET 03/27/2026 8.00 C","Sharplink",740.09,39.91,["IRA"],1,"03/23","03/23","03/27/26",60,false],["SBET 03/13/2026 8.00 C","Sharplink",740.09,39.91,["IRA"],1,"03/10","03/10","03/13/26",60,false],["COIN 03/13/2026 215.00 C","Coinbase",722.01,3.99,["IRA"],1,"03/10","03/10","03/13/26",6,false],["IBIT 01/30/2026 48.00 C","Bitcoin",700.5,139.5,["IRA"],1,"01/30","01/30","01/30/26",210,false],["IBIT 03/23/2026 41.50 C","Bitcoin",700.31,139.69,["IRA"],1,"03/23","03/23","03/23/26",210,false],["IBIT 06/12/2026 46.50 C","Bitcoin",700,9.3,["Roth IRA"],2,"05/13","05/21","06/12/26",7,false],["SQQQ 05/01/2026 57.00 C","Short QQQ",660,4.66,["Brokerage"],1,"04/28","04/28","05/01/26",7,false],["SQQQ 03/20/2026 78.00 C","Short QQQ",615.34,5.31,["Brokerage"],2,"03/13","03/20","03/20/26",4,false],["COIN 06/18/2026 230.00 C","Coinbase",590.66,1.34,["Brokerage"],2,"05/11","05/15","06/18/26",1,false],["ETHA 22MAY26 18.5 C","Ethereum",588,62.41,["IRA"],2,"05/14","05/15","05/22/26",50,false],["IBIT 02/09/2026 42.00 C","Bitcoin",586.74,21.26,["Brokerage"],1,"02/06","02/06","02/09/26",32,false],["COIN 01/16/2026 257.50 P","Coinbase",564.34,0.66,["Brokerage"],1,"01/14","01/14","01/16/26",1,false],["SOLZ 06/18/2026 10.00 C","Solana",556.89,43.11,["IRA"],2,"05/05","05/26","06/18/26",40,false],["IBIT 03/11/2026 40.50 C","Bitcoin",554.71,21.29,["Brokerage"],1,"03/09","03/09","03/11/26",32,false],["SQQQ 05/01/2026 58.50 C","Short QQQ",526.71,13.29,["Brokerage"],2,"04/23","04/24","05/01/26",10,true],["SBET 04/10/2026 6.50 C","Sharplink",520.38,79.62,["IRA"],2,"04/06","04/10","04/10/26",60,false],["IBIT 04/02/2026 39.50 C","Bitcoin",513,14.63,["Brokerage"],1,"04/01","04/01","04/02/26",22,false],["ETHA 29MAY26 17 C","Ethereum",501,50,["IRA"],3,"05/18","05/22","05/29/26",50,false],["CRCL 15MAY26 135 C","Circle",491,1.06,["IRA"],1,"05/11","05/11","05/15/26",1,false],["ETHA 03/27/2026 17.50 C","Ethereum",466.74,33.26,["IRA"],1,"03/23","03/23","03/27/26",50,false],["MSFT 05/01/2026 410.00 P","Microsoft",453.66,1.34,["IRA"],2,"04/23","04/30","05/01/26",1,false],["CRCL 15MAY26 128 C","Circle",449,0.78,["IRA"],1,"05/13","05/13","05/15/26",1,false],["COIN 04/24/2026 210.00 C","Coinbase",424.33,0.67,["Brokerage"],1,"04/22","04/22","04/24/26",1,false],["IBIT 03/20/2026 40.50 C","Bitcoin",416,15.97,["Brokerage"],1,"03/19","03/19","03/20/26",24,false],["SOLZ 05/15/2026 8.00 C","Solana",346.82,53.18,["IRA"],2,"04/14","04/16","05/15/26",40,true],["AMZN 06/18/2026 285.00 C","Amazon",310.98,4.02,["Brokerage"],2,"05/11","05/14","06/18/26",3,false],["MSTR 05/15/2026 175.00 C","Microstrategy",293.23,6.77,["IRA"],2,"04/20","04/20","05/15/26",5,false],["ETHA 04/17/2026 17.00 C","Ethereum",283.64,66.36,["IRA"],2,"04/06","04/13","04/17/26",50,false],["MSFT 04/24/2026 412.50 P","Microsoft",197.34,0.66,["IRA"],1,"04/23","04/23","04/24/26",1,false],["ETHA 04/17/2026 18.50 C","Ethereum",183.62,66.38,["IRA"],2,"04/14","04/17","04/17/26",50,true],["IBIT 01/30/2026 54.00 C","Bitcoin",-265.06,265.06,["IRA"],2,"01/21","01/22","01/30/26",200,false],["SQQQ 03/27/2026 78.00 C","Short QQQ",-857.31,3.64,["Brokerage"],2,"03/23","03/26","03/27/26",5,true],["SOLZ 04/17/2026 8.00 C","Solana",-905.74,106.22,["IRA"],4,"03/30","04/14","04/17/26",40,true],["IBIT 02/13/2026 38.50 C","Bitcoin",-1066.41,42.41,["Brokerage"],2,"02/11","02/13","02/13/26",32,true],["SQQQ 04/02/2026 82.00 C","Short QQQ",-1951.64,6.64,["Brokerage"],2,"03/26","03/27","04/02/26",5,true],["IBIT 02/13/2026 39.00 C","Bitcoin",-2168.31,278.31,["IRA"],2,"02/11","02/13","02/13/26",210,true],["AAPL 05/01/2026 277.50 C","Apple",-2953.98,7.98,["Brokerage"],2,"04/27","05/01","05/01/26",6,true],["IBIT 05/01/2026 44.00 C","Bitcoin",-9098.74,278.74,["IRA"],2,"04/29","05/01","05/01/26",210,true],["IBIT 04/17/2026 42.50 C","Bitcoin",-12763.8,278.8,["IRA"],3,"04/13","04/14","04/17/26",210,true],["IBIT 05/06/2026 44.50 C","Bitcoin",-17918.98,278.98,["IRA"],2,"05/01","05/05","05/06/26",210,true],["IBIT 02/25/2026 38.00 C","Bitcoin",-20018.31,278.31,["IRA"],2,"02/23","02/25","02/25/26",210,true],["IBIT 03/04/2026 40.00 C","Bitcoin",-30488.69,278.69,["IRA"],2,"03/03","03/04","03/04/26",210,true]];
+const ROLLOVER_EVENTS = [
+  {"date":"06/08","name":"Bitcoin","account":"IRA","from_sym":"IBIT 06/10/2026 36.00 C","to_sym":"IBIT 06/12/2026 36.00 C","credit":3815.89},
+  {"date":"06/05","name":"Bitcoin","account":"IRA","from_sym":"IBIT 06/05/2026 37.00 C","to_sym":"IBIT 06/10/2026 36.00 C","credit":5160.20},
+  {"date":"06/05","name":"Apple","account":"Brokerage","from_sym":"AAPL 06/18/2026 290.00 C","to_sym":"AAPL 09/18/2026 305.00 C","credit":-575.26},
+  {"date":"06/04","name":"Bitcoin","account":"IRA","from_sym":"IBIT 06/05/2026 40.00 C","to_sym":"IBIT 06/05/2026 37.00 C","credit":1170.28},
+  {"date":"06/02","name":"Bitcoin","account":"IRA","from_sym":"IBIT 06/05/2026 42.00 C","to_sym":"IBIT 06/05/2026 40.00 C","credit":2640.24},
+  {"date":"05/28","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/29/2026 44.00 C","to_sym":"IBIT 05/29/2026 42.50 C","credit":750.28},
+  {"date":"05/15","name":"Bitcoin","account":"IRA","from_sym":"IBIT 06/05/2026 47.50 C","to_sym":"IBIT 05/20/2026 45.00 C","credit":-68.98},
+  {"date":"05/05","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/06/2026 44.50 C","to_sym":"IBIT 06/05/2026 47.50 C","credit":140.65},
+  {"date":"05/01","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/01/2026 44.00 C","to_sym":"IBIT 05/06/2026 44.50 C","credit":2451.02},
+  {"date":"05/01","name":"Apple","account":"Brokerage","from_sym":"AAPL 05/01/2026 277.50 C","to_sym":"AAPL 06/18/2026 290.00 C","credit":501.95},
+  {"date":"04/29","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/29/2026 43.50 C","to_sym":"IBIT 05/01/2026 44.00 C","credit":2167.76},
+  {"date":"04/28","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/01/2026 45.00 C","to_sym":"IBIT 04/29/2026 43.50 C","credit":1191.23},
+  {"date":"04/23","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 04/24/2026 60.00 C","to_sym":"SQQQ 05/01/2026 58.50 C","credit":1023.21},
+  {"date":"04/20","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/20/2026 42.50 C","to_sym":"IBIT 05/01/2026 45.00 C","credit":981.08},
+  {"date":"04/17","name":"Ethereum","account":"IRA","from_sym":"ETHA 04/17/2026 18.50 C","to_sym":"ETHA 04/24/2026 20.00 C","credit":283.62},
+  {"date":"04/14","name":"Solana","account":"IRA","from_sym":"SOLZ 04/17/2026 8.00 C","to_sym":"SOLZ 05/15/2026 8.00 C","credit":946.82},
+  {"date":"04/14","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/17/2026 42.50 C","to_sym":"IBIT 04/20/2026 42.50 C","credit":3510.87},
+  {"date":"04/08","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/08/2026 41.00 C","to_sym":"IBIT 04/10/2026 41.50 C","credit":3427.73},
+  {"date":"03/27","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 04/02/2026 82.00 C","to_sym":"SQQQ 05/08/2026 95.00 C","credit":708.36},
+  {"date":"03/26","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 03/27/2026 78.00 C","to_sym":"SQQQ 04/02/2026 82.00 C","credit":98.36},
+  {"date":"03/17","name":"Bitcoin","account":"IRA","from_sym":"IBIT 03/18/2026 43.50 C","to_sym":"IBIT 03/18/2026 43.50 C","credit":4131.00},
+  {"date":"03/04","name":"Bitcoin","account":"IRA","from_sym":"IBIT 03/04/2026 40.00 C","to_sym":"IBIT 03/13/2026 41.00 C","credit":4551.31},
+  {"date":"02/25","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/25/2026 38.00 C","to_sym":"IBIT 02/27/2026 38.00 C","credit":6231.69},
+  {"date":"02/13","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/13/2026 39.00 C","to_sym":"IBIT 02/18/2026 40.50 C","credit":981.69},
+  {"date":"02/13","name":"Bitcoin","account":"Brokerage","from_sym":"IBIT 02/13/2026 38.50 C","to_sym":"IBIT 02/18/2026 39.50 C","credit":213.59},
+  {"date":"02/06","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/06/2026 46.00 C","to_sym":"IBIT 02/09/2026 43.00 C","credit":1748.19}
+];
 
-const ROLLOVER_EVENTS = [{"date":"05/29","name":"Solana","account":"IRA","from_sym":"SOLZ 06/18/2026 10.00 C","to_sym":"SOLZ 01/15/2027 10.00 C","credit":3446.52},{"date":"05/29","name":"Bitcoin","account":"Roth IRA","from_sym":"IBIT 06/12/2026 46.50 C","to_sym":"IBIT 10/16/2026 47.00 C","credit":1344},{"date":"05/05","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/06/2026 44.50 C","to_sym":"IBIT 06/05/2026 47.50 C","credit":140.65},{"date":"05/01","name":"Apple","account":"Brokerage","from_sym":"AAPL 05/01/2026 277.50 C","to_sym":"AAPL 06/18/2026 290.00 C","credit":501.95},{"date":"05/01","name":"Bitcoin","account":"IRA","from_sym":"IBIT 05/01/2026 44.00 C","to_sym":"IBIT 05/06/2026 44.50 C","credit":2451.02},{"date":"04/29","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/29/2026 43.50 C","to_sym":"IBIT 05/01/2026 44.00 C","credit":2167.76},{"date":"04/23","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 04/24/2026 60.00 C","to_sym":"SQQQ 05/01/2026 58.50 C","credit":1023.21},{"date":"04/20","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/20/2026 42.50 C","to_sym":"IBIT 05/01/2026 45.00 C","credit":981.08},{"date":"04/17","name":"Ethereum","account":"IRA","from_sym":"ETHA 04/17/2026 18.50 C","to_sym":"ETHA 04/24/2026 20.00 C","credit":283.62},{"date":"04/14","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/17/2026 42.50 C","to_sym":"IBIT 04/20/2026 42.50 C","credit":1567.08},{"date":"04/14","name":"Solana","account":"IRA","from_sym":"SOLZ 04/17/2026 8.00 C","to_sym":"SOLZ 05/15/2026 8.00 C","credit":946.82},{"date":"04/08","name":"Bitcoin","account":"IRA","from_sym":"IBIT 04/08/2026 41.00 C","to_sym":"IBIT 04/10/2026 41.50 C","credit":3427.73},{"date":"03/27","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 04/02/2026 82.00 C","to_sym":"SQQQ 05/08/2026 95.00 C","credit":708.36},{"date":"03/26","name":"Short QQQ","account":"Brokerage","from_sym":"SQQQ 03/27/2026 78.00 C","to_sym":"SQQQ 04/02/2026 82.00 C","credit":98.36},{"date":"03/04","name":"Bitcoin","account":"IRA","from_sym":"IBIT 03/04/2026 40.00 C","to_sym":"IBIT 03/13/2026 41.00 C","credit":4551.31},{"date":"02/25","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/25/2026 38.00 C","to_sym":"IBIT 02/27/2026 38.00 C","credit":6231.69},{"date":"02/13","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/13/2026 39.00 C","to_sym":"IBIT 02/18/2026 40.50 C","credit":981.69},{"date":"02/13","name":"Bitcoin","account":"Brokerage","from_sym":"IBIT 02/13/2026 38.50 C","to_sym":"IBIT 02/18/2026 39.50 C","credit":213.59},{"date":"02/06","name":"Bitcoin","account":"IRA","from_sym":"IBIT 02/06/2026 46.00 C","to_sym":"IBIT 02/09/2026 43.00 C","credit":1748.19}];
+const ACTIVE_CONTRACTS = [
+  {name:"Bitcoin",  contract:"IBIT 06/12 $36C",  account:"IRA",       qty:210, opened:"06/08", expiry:"06/12/26", dte:4,   net_collected:20072.39, net_pnl:19984.78, is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Sharplink",contract:"SBET 06/12 $6.50C", account:"IRA",       qty:60,  opened:"05/28", expiry:"06/12/26", dte:4,   net_collected:1237.06,  net_pnl:1212.12,  is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Coinbase", contract:"COIN 06/12 $180C",  account:"IRA",       qty:6,   opened:"06/08", expiry:"06/12/26", dte:4,   net_collected:639.50,   net_pnl:637.00,   is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Short QQQ",contract:"SQQQ 06/12 $42C",   account:"Brokerage", qty:4,   opened:"06/08", expiry:"06/12/26", dte:4,   net_collected:418.00,   net_pnl:416.33,   is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Coinbase", contract:"COIN 06/18 $220C",  account:"Brokerage", qty:1,   opened:"05/04", expiry:"06/18/26", dte:10,  net_collected:2175.96,  net_pnl:2173.92,  is_rolled:true,  roll_count:1, roll_detail:"Partial close: 1 of 2 contracts bought back 05/08 (–$929 buyback); 1 contract remaining"},
+  {name:"Coinbase", contract:"COIN 07/02 $200C",  account:"Brokerage", qty:2,   opened:"05/29", expiry:"07/02/26", dte:24,  net_collected:314.00,   net_pnl:313.16,   is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Solana",   contract:"SOLZ 07/17 $7C",    account:"IRA",       qty:40,  opened:"06/08", expiry:"07/17/26", dte:39,  net_collected:1783.35,  net_pnl:1766.70,  is_rolled:false, roll_count:0, roll_detail:null},
+  {name:"Apple",    contract:"AAPL 09/18 $305C",  account:"Brokerage", qty:6,   opened:"06/05", expiry:"09/18/26", dte:102, net_collected:14337.21, net_pnl:14334.42, is_rolled:true,  roll_count:1, roll_detail:"Rolled from AAPL 06/18 $290C on 06/05 (–$14,912 buyback to roll)"}
+];
+
+const WEEKLY_DATA = {
+  labels:['1/5','1/12','1/19','1/26','2/2','2/9','2/16','2/23','3/2','3/9','3/16','3/23','3/30','4/6','4/13','4/20','4/27','5/4','5/11','5/18','5/25','6/1','6/8'],
+  pnl:[3467.24,5247.49,-265.06,700.50,7452.22,7684.53,2708.09,9242.19,9264.64,3154.15,10368.15,10090.26,3921.44,10399.54,9349.59,5375.29,12321.64,10585.62,5990.63,3989.61,15130.03,5794.74,6656.74],
+  trades:[1,3,2,1,5,7,3,3,5,4,8,12,7,10,14,12,17,13,13,9,9,18,5]
+};
+
+const FORECAST = {
+  actual:[9150.17,27087.03,37913.64,33387.13,38639.82,12451.48],
+  conservative:[26438,26438,26438,26438,26438,26438],
+  base:[28000,28000,28000,28000,28000,28000],
+  optimistic:[32000,35000,38000,41000,44000,48000],
+  ytdTotal:158629.27,
+  yearEndCons:317257,yearEndBase:326629,yearEndOpt:396629
+};
 
 // Per-account DB
-// ═══════════════════════════════════════
 const DB = {
   All:{
-    pnl:144520.15,wr:74,wd:51,td:68,premium:351578.33,trades:163,fees:7717.50,
-    bestMonth:'March',bestVal:37913.64,avgMo:23691.07,
-    mPnl:[9150.17,27087.03,37913.64,33387.13,36070.18,912.00],
-    mTrades:[7,18,34,50,47,7],mFees:[674.83,1420.97,1814.64,1963.35,1658.42,185.29],mWR:[86,72,79,64,60,57],
-    tickers:['Bitcoin','Coinbase','Sharplink','Ethereum','Solana','Short QQQ','Amazon','Apple','Walmart','Circle','Microsoft','Microstrategy'],
-    tPnl:[93379.53,17278.39,8237.90,7473.59,5528.36,3345.68,2426.92,1553.94,1037.88,940,651,293.23],
-    dLabels:['IRA','Brokerage','Roth IRA'],dData:[123488.58,16280.84,2377],
-    dColors:['#059669','#6366f1','#f59e0b'],dCV:'86%',dCL:'IRA',dTitle:'Account Split',dSub:'P&L share by account',
-    actions:{'Sell to Open':107,'Buy to Close':50,'Sell to Close':1,'Buy to Open':1},
-    daily:{'2026-01-06':3467.24,'2026-01-13':4683.15,'2026-01-14':564.34,'2026-01-21':3267.14,'2026-01-22':-3532.2,'2026-01-30':700.5,'2026-02-03':3850.5,'2026-02-04':1266.79,'2026-02-06':2334.93,'2026-02-11':6489.25,'2026-02-13':1195.28,'2026-02-17':-405.15,'2026-02-18':522.74,'2026-02-19':2590.5,'2026-02-23':3010.5,'2026-02-25':6231.69,'2026-03-02':1540.31,'2026-03-03':2170.31,'2026-03-04':5554.02,'2026-03-09':554.71,'2026-03-10':1462.1,'2026-03-13':1137.34,'2026-03-16':6343.15,'2026-03-17':4131,'2026-03-19':416,'2026-03-20':-522,'2026-03-23':6939.54,'2026-03-24':3850,'2026-03-26':98.36,'2026-03-27':-797.64,'2026-03-30':6610.44,'2026-03-31':-1574,'2026-04-01':-1115,'2026-04-06':5607.14,'2026-04-08':3918.73,'2026-04-10':873.67,'2026-04-13':3177.1,'2026-04-14':5424.41,'2026-04-16':-4026.48,'2026-04-17':4774.56,'2026-04-20':3147.71,'2026-04-22':424.33,'2026-04-23':2319.87,'2026-04-24':-516.62,'2026-04-27':2779.33,'2026-04-28':5076.28,'2026-04-29':2167.76,'2026-04-30':-645.66,'2026-05-01':2943.93,'2026-05-04':8780.35,'2026-05-05':1034.02,'2026-05-06':-186.63,'2026-05-07':-683.1,'2026-05-08':-928.66,'2026-05-11':4250.28,'2026-05-12':1549.98,'2026-05-13':1482,'2026-05-14':-336.99,'2026-05-15':-954.64,'2026-05-18':-732,'2026-05-20':4060.22,'2026-05-21':1522.97,'2026-05-22':-861.58,'2026-05-26':3356.25,'2026-05-28':5164.78,'2026-05-29':6609,'2026-06-01':-1461.73},
-    rv:19,rvCredits:31814.64,rvAvg:1674
+    pnl:158629.27,wr:76,wd:55,td:72,premium:394825.36,trades:181,fees:8192.02,
+    bestMonth:'May',bestVal:38639.82,avgMo:26438.21,
+    mPnl:[9150.17,27087.03,37913.64,33387.13,38639.82,12451.48],
+    mTrades:[7,18,34,50,49,23],mFees:[674.83,1420.97,1814.64,1963.35,1663.78,654.45],mWR:[83,90,81,75,61,83],
+    tickers:['Bitcoin','Coinbase','Ethereum','Sharplink','Short QQQ','Solana','Amazon','Circle','Walmart','Apple','Microsoft','Microstrategy'],
+    tPnl:[104834.14,21672.69,8253.59,8237.90,4781.01,3895.23,2426.92,1567.00,1037.88,978.68,651.00,293.23],
+    dLabels:['IRA','Brokerage','Roth IRA'],dData:[137754.05,19830.22,1045.00],
+    dColors:['#059669','#6366f1','#f59e0b'],dCV:'87%',dCL:'IRA',dTitle:'Account Split',dSub:'P&L share by account',
+    actions:{'Sell to Open':120,'Buy to Close':59,'Sell to Close':1,'Buy to Open':1},
+    daily:{"2026-01-06":3467.24,"2026-01-13":4683.15,"2026-01-14":564.34,"2026-01-21":3267.14,"2026-01-22":-3532.2,"2026-01-30":700.5,"2026-02-03":3850.5,"2026-02-04":1266.79,"2026-02-06":2334.93,"2026-02-11":6489.25,"2026-02-13":1195.28,"2026-02-17":-405.15,"2026-02-18":522.74,"2026-02-19":2590.5,"2026-02-23":3010.5,"2026-02-25":6231.69,"2026-03-02":1540.31,"2026-03-03":2170.31,"2026-03-04":5554.02,"2026-03-09":554.71,"2026-03-10":1462.1,"2026-03-13":1137.34,"2026-03-16":6343.15,"2026-03-17":4131.0,"2026-03-19":416.0,"2026-03-20":-522.0,"2026-03-23":6939.54,"2026-03-24":3850.0,"2026-03-26":98.36,"2026-03-27":-797.64,"2026-03-30":6610.44,"2026-03-31":-1574.0,"2026-04-01":-1115.0,"2026-04-06":5607.14,"2026-04-08":3918.73,"2026-04-10":873.67,"2026-04-13":3177.1,"2026-04-14":5424.41,"2026-04-16":-4026.48,"2026-04-17":4774.56,"2026-04-20":3147.71,"2026-04-22":424.33,"2026-04-23":2319.87,"2026-04-24":-516.62,"2026-04-27":2779.33,"2026-04-28":5076.28,"2026-04-29":2167.76,"2026-04-30":-645.66,"2026-05-01":2943.93,"2026-05-04":11349.99,"2026-05-05":1034.02,"2026-05-06":-186.63,"2026-05-07":-683.1,"2026-05-08":-928.66,"2026-05-11":4250.28,"2026-05-12":1549.98,"2026-05-13":1482.0,"2026-05-14":-336.99,"2026-05-15":-954.64,"2026-05-18":-732.0,"2026-05-20":4060.22,"2026-05-21":1522.97,"2026-05-22":-861.58,"2026-05-26":3356.25,"2026-05-28":5164.78,"2026-05-29":6609.0,"2026-06-01":2387.27,"2026-06-02":2373.73,"2026-06-03":-4721.48,"2026-06-04":1170.28,"2026-06-05":4584.94,"2026-06-08":6656.74},
+    rv:26,rvCredits:48183,rvAvg:1853
   },
   IRA:{
-    pnl:127194.31,wr:83,wd:46,td:55,premium:313031.77,trades:112,fees:7355.96,
-    bestMonth:'March',bestVal:33797.16,avgMo:20581.43,
-    mPnl:[8585.83,25134.37,33797.16,26803.55,28657.40,4216.00],
-    mTrades:[6,12,24,35,30,5],mFees:[674.17,1293.63,1737.17,1853.45,1615.54,182.00],mWR:[83,75,83,60,63,67],
-    tickers:['Bitcoin','Coinbase','Sharplink','Ethereum','Solana','Circle','Microsoft','Microstrategy'],
-    tPnl:[84466.09,15898.41,8237.90,7473.59,5528.36,940,651,293.23],
-    dLabels:['Bitcoin','Coinbase','Ethereum','Sharplink','Others'],dData:[84466.09,15898.41,7473.59,8237.90,7412.59],
-    dColors:['#f7931a','#3772ff','#627eea','#6366f1','#94a3b8'],dCV:'66%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of IRA P&L',
-    actions:{'Sell to Open':74,'Buy to Close':33,'Sell to Close':1,'Buy to Open':1},
-    daily:{'2026-01-06':3467.24,'2026-01-13':4683.15,'2026-01-21':3267.14,'2026-01-22':-3532.2,'2026-01-30':700.5,'2026-02-03':3850.5,'2026-02-04':1266.79,'2026-02-06':1748.19,'2026-02-11':5454.51,'2026-02-13':981.69,'2026-02-19':2590.5,'2026-02-23':3010.5,'2026-02-25':6231.69,'2026-03-02':1540.31,'2026-03-03':2170.31,'2026-03-04':4551.31,'2026-03-10':1462.1,'2026-03-16':6343.15,'2026-03-17':4131,'2026-03-23':6218.54,'2026-03-24':3850,'2026-03-27':-1506,'2026-03-30':6610.44,'2026-03-31':-1574,'2026-04-06':5607.14,'2026-04-08':3427.73,'2026-04-10':1107.67,'2026-04-13':3177.1,'2026-04-14':5424.41,'2026-04-16':-4026.48,'2026-04-17':3447.56,'2026-04-20':2314.38,'2026-04-23':1296.66,'2026-04-27':1213.98,'2026-04-28':2291.3,'2026-04-29':2167.76,'2026-04-30':-645.66,'2026-05-01':2451.02,'2026-05-04':5410.71,'2026-05-05':1034.02,'2026-05-07':-683.1,'2026-05-11':491,'2026-05-12':1549.98,'2026-05-13':449,'2026-05-14':865,'2026-05-15':-345.98,'2026-05-18':-732,'2026-05-20':4060.22,'2026-05-21':1855.97,'2026-05-22':-852.47,'2026-05-26':3356.25,'2026-05-28':5164.78,'2026-05-29':3783,'2026-06-01':510.27},
-    rv:15,rvCredits:28730.83,rvAvg:1915
+    pnl:137754.05,wr:83,wd:49,td:59,premium:338953.95,trades:125,fees:7818.19,
+    bestMonth:'March',bestVal:33797.16,avgMo:22959.01,
+    mPnl:[8585.83,25134.37,33797.16,26803.55,28657.40,14775.74],
+    mTrades:[6,12,24,35,30,18],mFees:[674.17,1293.63,1737.17,1853.45,1615.54,644.23],mWR:[80,100,82,85,75,83],
+    tickers:['Bitcoin','Coinbase','Ethereum','Sharplink','Solana','Circle','Microsoft','Microstrategy'],
+    tPnl:[97252.70,17603.40,8253.59,8237.90,3895.23,1567.00,651.00,293.23],
+    dLabels:['Bitcoin','Coinbase','Ethereum','Sharplink','Others'],dData:[97252.70,17603.40,8253.59,8237.90,6407.46],
+    dColors:['#f7931a','#3772ff','#627eea','#6366f1','#94a3b8'],dCV:'71%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of IRA P&L',
+    actions:{'Sell to Open':83,'Buy to Close':40,'Sell to Close':1,'Buy to Open':1},
+    daily:{"2026-01-06":3467.24,"2026-01-13":4683.15,"2026-01-21":3267.14,"2026-01-22":-3532.2,"2026-01-30":700.5,"2026-02-03":3850.5,"2026-02-04":1266.79,"2026-02-06":1748.19,"2026-02-11":5454.51,"2026-02-13":981.69,"2026-02-19":2590.5,"2026-02-23":3010.5,"2026-02-25":6231.69,"2026-03-02":1540.31,"2026-03-03":2170.31,"2026-03-04":4551.31,"2026-03-10":1462.1,"2026-03-16":6343.15,"2026-03-17":4131.0,"2026-03-23":6218.54,"2026-03-24":3850.0,"2026-03-27":-1506.0,"2026-03-30":6610.44,"2026-03-31":-1574.0,"2026-04-06":5607.14,"2026-04-08":3427.73,"2026-04-10":1107.67,"2026-04-13":3177.1,"2026-04-14":5424.41,"2026-04-16":-4026.48,"2026-04-17":3447.56,"2026-04-20":2314.38,"2026-04-23":1296.66,"2026-04-27":1213.98,"2026-04-28":2291.3,"2026-04-29":2167.76,"2026-04-30":-645.66,"2026-05-01":2451.02,"2026-05-04":6210.71,"2026-05-05":1034.02,"2026-05-07":-683.1,"2026-05-11":491.0,"2026-05-12":1549.98,"2026-05-13":449.0,"2026-05-14":865.0,"2026-05-15":-345.98,"2026-05-18":-732.0,"2026-05-20":4060.22,"2026-05-21":1855.97,"2026-05-22":-852.47,"2026-05-26":3356.25,"2026-05-28":5164.78,"2026-05-29":3783.0,"2026-06-01":3222.27,"2026-06-02":3705.73,"2026-06-03":-4721.48,"2026-06-04":1170.28,"2026-06-05":5160.2,"2026-06-08":6238.74},
+    rv:22,rvCredits:44469,rvAvg:2021
   },
   'Roth IRA':{
     pnl:1045,wr:50,wd:2,td:4,premium:2710,trades:4,fees:15.11,
     bestMonth:'May',bestVal:2377,avgMo:2377,
     mPnl:[0,0,0,0,2377,-1332],mTrades:[0,0,0,0,3,1],mFees:[0,0,0,0,12.23,2.88],mWR:[null,null,null,null,67,0],
-    tickers:['Bitcoin'],tPnl:[2377],
-    dLabels:['Bitcoin'],dData:[2377],dColors:['#f7931a'],dCV:'100%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of Roth IRA P&L',
-    actions:{'Sell to Open':2,'Buy to Close':1},
-    daily:{'2026-05-13':1033,'2026-05-21':-333,'2026-05-29':1677},
+    tickers:['Bitcoin'],tPnl:[1045],
+    dLabels:['Bitcoin'],dData:[1045],dColors:['#f7931a'],dCV:'100%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of Roth IRA P&L',
+    actions:{'Sell to Open':2,'Buy to Close':2},
+    daily:{"2026-05-13":1033.0,"2026-05-21":-333.0,"2026-05-29":1677.0,"2026-06-02":-1332.0},
     rv:1,rvCredits:1344,rvAvg:1344
   },
   Brokerage:{
-    pnl:16280.84,wr:68,wd:23,td:34,premium:35837.56,trades:47,fees:346.43,
-    bestMonth:'April',bestVal:6583.58,avgMo:2713.47,
-    mPnl:[564.34,1952.66,4116.48,6583.58,5035.78,-1972],
-    mTrades:[1,6,10,15,14,1],mFees:[0.66,127.34,77.47,109.9,30.65,0.41],mWR:[100,67,70,73,50,0],
-    tickers:['Bitcoin','Coinbase','Short QQQ','Amazon','Apple','Walmart'],
-    tPnl:[6536.44,1379.98,3345.68,2426.92,1553.94,1037.88],
-    dLabels:['Bitcoin','Coinbase','Short QQQ','Amazon','Apple','Walmart'],
-    dData:[6536.44,1379.98,3345.68,2426.92,1553.94,1037.88],
-    dColors:['#f7931a','#3772ff','#ef4444','#ff9900','#555','#0071ce'],dCV:'36%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of Brokerage P&L',
-    actions:{'Sell to Open':31,'Buy to Close':16},
-    daily:{'2026-01-14':564.34,'2026-02-06':586.74,'2026-02-11':1034.74,'2026-02-13':213.59,'2026-02-17':-405.15,'2026-02-18':522.74,'2026-03-04':1002.71,'2026-03-09':554.71,'2026-03-13':1137.34,'2026-03-19':416,'2026-03-20':-522,'2026-03-23':721,'2026-03-26':98.36,'2026-03-27':708.36,'2026-04-01':-1115,'2026-04-08':491,'2026-04-10':-234,'2026-04-17':1327,'2026-04-20':833.33,'2026-04-22':424.33,'2026-04-23':1023.21,'2026-04-24':-516.62,'2026-04-27':1565.35,'2026-04-28':2784.98,'2026-05-01':492.91,'2026-05-04':3369.64,'2026-05-06':-186.63,'2026-05-08':-928.66,'2026-05-11':3759.28,'2026-05-14':-1201.99,'2026-05-15':-608.66,'2026-05-22':-9.11,'2026-05-29':1149,'2026-06-01':-1972},
+    pnl:19830.22,wr:67,wd:24,td:36,premium:53161.41,trades:52,fees:358.72,
+    bestMonth:'May',bestVal:7605.42,avgMo:3305.04,
+    mPnl:[564.34,1952.66,4116.48,6583.58,7605.42,-992.26],
+    mTrades:[1,6,10,15,16,4],mFees:[0.66,127.34,77.47,109.9,36.01,7.34],mWR:[100,80,88,70,44,33],
+    tickers:['Bitcoin','Short QQQ','Coinbase','Amazon','Walmart','Apple'],
+    tPnl:[6536.44,4781.01,4069.29,2426.92,1037.88,978.68],
+    dLabels:['Bitcoin','Short QQQ','Coinbase','Amazon','Walmart','Apple'],
+    dData:[6536.44,4781.01,4069.29,2426.92,1037.88,978.68],
+    dColors:['#f7931a','#ef4444','#3772ff','#ff9900','#0071ce','#555'],dCV:'33%',dCL:'Bitcoin',dTitle:'Ticker Concentration',dSub:'Share of Brokerage P&L',
+    actions:{'Sell to Open':35,'Buy to Close':17},
+    daily:{"2026-01-14":564.34,"2026-02-06":586.74,"2026-02-11":1034.74,"2026-02-13":213.59,"2026-02-17":-405.15,"2026-02-18":522.74,"2026-03-04":1002.71,"2026-03-09":554.71,"2026-03-13":1137.34,"2026-03-19":416.0,"2026-03-20":-522.0,"2026-03-23":721.0,"2026-03-26":98.36,"2026-03-27":708.36,"2026-04-01":-1115.0,"2026-04-08":491.0,"2026-04-10":-234.0,"2026-04-17":1327.0,"2026-04-20":833.33,"2026-04-22":424.33,"2026-04-23":1023.21,"2026-04-24":-516.62,"2026-04-27":1565.35,"2026-04-28":2784.98,"2026-05-01":492.91,"2026-05-04":5139.28,"2026-05-06":-186.63,"2026-05-08":-928.66,"2026-05-11":3759.28,"2026-05-14":-1201.99,"2026-05-15":-608.66,"2026-05-22":-9.11,"2026-05-29":1149.0,"2026-06-01":-835.0,"2026-06-05":-575.26,"2026-06-08":418.0},
     rv:3,rvCredits:3076.8,rvAvg:1026
   }
-};
-
-const WEEKLY_DATA = {
-  labels:['1/5','1/12','1/19','1/26','2/2','2/9','2/16','2/23','3/2','3/9','3/16','3/23','3/30','4/6','4/13','4/20','4/27','5/4','5/11','5/18','5/25','6/1'],
-  pnl:[3467.24,5247.49,-265.06,700.50,7452.22,7684.53,2708.09,9242.19,9264.64,3154.15,10368.15,10090.26,3921.44,10399.54,9349.59,5375.29,12321.64,8015.98,5990.63,3989.61,15130.03,2049.00],
-  trades:[1,3,2,1,5,7,3,3,5,4,8,12,7,10,14,12,17,11,13,9,9,7]
-};
-
-const FORECAST = {
-  actual:[9150.17,27087.03,37913.64,33387.13,36070.18,912.00],
-  conservative:[28722,28722,28722,28722,28722,28722],
-  base:[30000,30000,30000,30000,30000,30000],
-  optimistic:[33000,37000,41000,45000,49000,53000],
-  ytdTotal:144520.15,
-  yearEndCons:314478,yearEndBase:322146,yearEndOpt:400146
 };
 
 // ═══════════════════════════════════════
@@ -681,6 +737,65 @@ Chart.defaults.font.size=11;
 let charts={};
 
 // ═══════════════════════════════════════
+// ACTIVE CONTRACTS
+// ═══════════════════════════════════════
+function renderActiveContracts(acct){
+  let contracts = acct==='All' ? ACTIVE_CONTRACTS : ACTIVE_CONTRACTS.filter(c=>c.account===acct);
+  const totalCollected = contracts.reduce((s,c)=>s+c.net_collected,0);
+  const totalPnl = contracts.reduce((s,c)=>s+c.net_pnl,0);
+  const expiringSoon = contracts.filter(c=>c.dte<=7).length;
+  $('ac-count').textContent = contracts.length;
+  $('ac-expiring').textContent = expiringSoon;
+  $('ac-collected').textContent = '$'+totalCollected.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+  $('ac-pnl').textContent = '$'+totalPnl.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+  if(!contracts.length){
+    $('acTable').innerHTML='<tr><td colspan="10" style="text-align:center;padding:20px;color:var(--muted);font-size:.75rem;">No active contracts for this account</td></tr>';
+    return;
+  }
+  const acctColor={IRA:'var(--green)',Brokerage:'var(--purple)','Roth IRA':'var(--amber)'};
+  $('acTable').innerHTML=contracts.map(c=>{
+    const dteClass=c.dte<=7?'dte-red':c.dte<=21?'dte-amber':'dte-green';
+    const dteText=c.dte+'d';
+    const rollBadge=c.roll_count>0?`<span class="roll-badge" title="${c.roll_detail||''}">↻${c.roll_count}</span>`:'';
+    const acct_col=acctColor[c.account]||'var(--text2)';
+    return `<tr>
+      <td><strong>${c.name}</strong> ${rollBadge}</td>
+      <td class="mono" style="font-size:.71rem;color:var(--text2);">${c.contract}</td>
+      <td><span style="color:${acct_col};font-size:.68rem;font-weight:700;">${c.account}</span></td>
+      <td class="right" style="font-weight:600;">${c.qty}</td>
+      <td class="right mono" style="color:var(--muted);">${c.opened}</td>
+      <td class="right mono" style="color:var(--text2);">${c.expiry}</td>
+      <td class="right"><span class="dte-badge ${dteClass}">${dteText}</span></td>
+      <td class="right green" style="font-size:.73rem;">${fmt(c.net_collected,2)}</td>
+      <td class="right" style="font-weight:700;color:var(--green);">${fmt(c.net_pnl,2)}</td>
+      <td class="right">${c.is_rolled?'<span class="badge bg-purple">↻ Rolled</span>':'<span class="badge bg-green">Active</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+// TICKER TABLE
+// ═══════════════════════════════════════
+function renderTickerTable(d){
+  const total=d.tPnl.reduce((s,v)=>s+v,0);
+  const maxPnl=Math.max(...d.tPnl.map(Math.abs),1);
+  $('tickerTable').innerHTML=d.tickers.map((t,i)=>{
+    const pnl=d.tPnl[i];
+    const pct=((pnl/total)*100).toFixed(1);
+    const col=TICKER_COLORS[t]||'#6366f1';
+    const barW=Math.min((Math.abs(pnl)/maxPnl)*100,100).toFixed(1);
+    return `<div class="tt-row">
+      <span class="tt-rank">${i+1}</span>
+      <span class="tt-dot" style="background:${col};"></span>
+      <span class="tt-name">${t}</span>
+      <span class="tt-pnl" style="color:${pnl>=0?'var(--green)':'var(--red)'};">${pnl>=0?'+':''}${fmt(pnl,2)}</span>
+      <span class="tt-pct" style="color:var(--muted);">${pct}%</span>
+      <div class="tt-bar"><div class="tt-bar-fill" style="width:${barW}%;background:${col}55;border-left:2px solid ${col};"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
 // ROLLOVER LIST
 // ═══════════════════════════════════════
 function renderRollovers(acct){
@@ -689,7 +804,7 @@ function renderRollovers(acct){
   const avg = events.length ? Math.round(total/events.length) : 0;
   $('rv-count').textContent = events.length;
   $('rv-count-sub').textContent = acct==='All' ? 'across all accounts' : `in ${acct}`;
-  $('rv-credits').textContent = '$'+Math.round(total).toLocaleString();
+  $('rv-credits').textContent = (total>=0?'$':'-$')+Math.abs(Math.round(total)).toLocaleString();
   $('rv-avg').textContent = avg > 0 ? '$'+avg.toLocaleString() : '—';
   $('rvList').innerHTML = events.map(r=>`
     <div class="rv-row">
@@ -697,7 +812,7 @@ function renderRollovers(acct){
       <span class="rv-name">${r.name}</span>
       <span class="rv-acct">${r.account}</span>
       <span class="rv-arrow">${r.from_sym.split(' ').slice(1).join(' ')} → ${r.to_sym.split(' ').slice(1).join(' ')}</span>
-      <span class="rv-credit">+${fmt(r.credit,2)}</span>
+      <span class="rv-credit" style="color:${r.credit>=0?'var(--green)':'var(--red)'};">${r.credit>=0?'+':''}${fmt(r.credit,2)}</span>
     </div>`).join('');
   if(!events.length) $('rvList').innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:.75rem;">No rollover events for this account</div>';
 }
@@ -711,9 +826,10 @@ function renderMonthlyStats(d){
     const p=d.mPnl[i];
     const bw=p>0?((p/maxP)*100).toFixed(1):0;
     const wr=d.mWR[i]!=null?d.mWR[i]+'%':'—';
+    const fillColor=p>0?'linear-gradient(90deg,#059669,#34d399)':'linear-gradient(90deg,#dc2626,#f87171)';
     return `<div class="ms-row">
-      <span class="ms-mo">${M3[i]}</span>
-      <div class="ms-track"><div class="ms-fill" style="width:${bw}%;"></div></div>
+      <span class="ms-mo" style="font-size:.65rem;">${M3[i]}</span>
+      <div class="ms-track"><div class="ms-fill" style="width:${bw}%;background:${fillColor};"></div></div>
       <span class="ms-val" style="color:${p>0?'var(--green)':p===0?'var(--muted)':'var(--red)'};">${p>0?'+':p===0?'—':''}${p!==0?fmt(p,0):'$0'}</span>
     </div>
     <div class="ms-meta">
@@ -771,24 +887,21 @@ function renderKPIs(d, acct){
   $('kpi-wr-sub').textContent=`${d.wd} of ${d.td} trading days`;
   $('kpi-prem').textContent=fmt(d.premium);
   $('kpi-trades').textContent=d.trades;
-  $('kpi-trades-sub').textContent=`transactions · 22 active weeks`;
+  $('kpi-trades-sub').textContent=`transactions · 23 active weeks`;
   $('kpi-fees').textContent=fmt(d.fees);
   $('kpi-fees-sub').textContent=((d.fees/d.premium)*100).toFixed(1)+'% of gross premium';
   $('kpi-best').textContent=fmt(d.bestVal);
   $('kpi-best-sub').textContent=`${d.bestMonth} 2026 · peak month`;
-  // Strip
   const bi=d.mPnl.indexOf(Math.max(...d.mPnl));
   const si=d.mPnl.indexOf(Math.min(...d.mPnl));
   $('ms-avg').textContent=fmt(d.avgMo);
   $('ms-best').textContent=MONTHS[bi];
   $('ms-slow').textContent=MONTHS[si];
   $('cum-total').textContent='+'+fmt(d.pnl);
-  // Topbar
   const names={All:'All Accounts',IRA:'IRA Account','Roth IRA':'Roth IRA Account',Brokerage:'Brokerage Account'};
   $('tb-title').textContent=names[acct];
   $('tb-sub').textContent=`January – June 2026 · ${d.trades} transactions`;
   $('tb-badge').textContent='YTD +'+fmt(d.pnl);
-  // Sidebar
   $('qs-wr').textContent=d.wr+'%';
   $('qs-trades').textContent=d.trades;
   $('qs-best').textContent=d.bestMonth;
@@ -799,7 +912,7 @@ function renderKPIs(d, acct){
 // BUILD CHARTS
 // ═══════════════════════════════════════
 function buildCharts(d){
-  Object.values(charts).forEach(c=>c.destroy());
+  Object.values(charts).forEach(c=>{try{c.destroy();}catch(e){}});
   charts={};
 
   // Monthly
@@ -809,14 +922,8 @@ function buildCharts(d){
   const cum=d.mPnl.reduce((a,v,i)=>{a.push((a[i-1]||0)+v);return a;},[]);
   charts.cum=new Chart($('cumChart'),{type:'line',data:{labels:M3,datasets:[{data:cum,borderColor:'#059669',borderWidth:2.5,tension:.4,pointBackgroundColor:'#059669',pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:5,pointHoverRadius:7,fill:true,backgroundColor:(ctx)=>{const{ctx:c,chartArea:ca}=ctx.chart;if(!ca)return'transparent';const g=c.createLinearGradient(0,ca.top,0,ca.bottom);g.addColorStop(0,'rgba(5,150,105,.16)');g.addColorStop(1,'rgba(5,150,105,.01)');return g;}}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{label:ctx=>' Total: '+fmt(ctx.parsed.y,2)}}},scales:{x:{grid:{display:false},border:{display:false}},y:{grid:{color:gridC},border:{display:false},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}}}}});
 
-  // Ticker
-  const tc=d.tickers.map(t=>TICKER_COLORS[t]||'#6366f1');
-  charts.ticker=new Chart($('tickerChart'),{type:'bar',data:{labels:d.tickers,datasets:[{data:d.tPnl,backgroundColor:tc.map(c=>c+'cc'),borderColor:tc,borderWidth:1.5,borderRadius:4,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{label:ctx=>' '+fmt(ctx.parsed.x,2)}}},scales:{x:{grid:{color:gridC},border:{display:false},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}},y:{grid:{display:false},border:{display:false}}}}});
-
-  // Donut
-  charts.donut=new Chart($('donutChart'),{type:'doughnut',data:{labels:d.dLabels,datasets:[{data:d.dData,backgroundColor:d.dColors.map(c=>c+'cc'),borderColor:d.dColors,borderWidth:2,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{...defTip,callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.parsed,2)}}}}});
-  $('donut-title').textContent=d.dTitle; $('donut-sub').textContent=d.dSub;
-  $('d-val').textContent=d.dCV; $('d-lbl').textContent=d.dCL;
+  // Ticker Table (data-focused, no chart)
+  renderTickerTable(d);
 
   // Activity
   charts.activity=new Chart($('activityChart'),{type:'bar',data:{labels:M3,datasets:[{label:'Trades',data:d.mTrades,backgroundColor:'rgba(99,102,241,.65)',borderColor:'#6366f1',borderWidth:1.5,borderRadius:4,yAxisID:'y1'},{label:'Fees ($)',data:d.mFees,backgroundColor:'rgba(217,119,6,.55)',borderColor:'#d97706',borderWidth:1.5,borderRadius:4,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:9,padding:12,color:'#4b5875',font:{size:10}}},tooltip:defTip},scales:{x:{grid:{display:false},border:{display:false}},y1:{grid:{color:gridC},border:{display:false},position:'left',ticks:{stepSize:5}},y2:{grid:{display:false},border:{display:false},position:'right',ticks:{callback:v=>'$'+v}}}}});
@@ -838,11 +945,10 @@ function buildCharts(d){
 }
 
 // ═══════════════════════════════════════
-// FORECAST CHART (static, always same)
+// FORECAST CHART
 // ═══════════════════════════════════════
 function buildForecastChart(){
-  if(charts.forecast){charts.forecast.destroy();}
-  // Bridge: connect actual May bar to projected Jun line by sharing the May value at index 4
+  if(charts.forecast){try{charts.forecast.destroy();}catch(e){}}
   const actualFull=[...FORECAST.actual,...Array(6).fill(null)];
   const junVal=FORECAST.actual[5];
   const consFull=[null,null,null,null,null,junVal,...FORECAST.conservative];
@@ -885,17 +991,16 @@ function buildForecastChart(){
 // ═══════════════════════════════════════
 function setAccount(acct){
   const d=DB[acct];
-  // Sidebar buttons
   document.querySelectorAll('.acct-btn').forEach(b=>b.classList.remove('active'));
   const btnId = acct==='Roth IRA'?'btn-RothIRA':'btn-'+acct;
   $(btnId).classList.add('active');
-  // Render
   renderKPIs(d,acct);
   buildCharts(d);
   renderRollovers(acct);
   renderMonthlyStats(d);
   renderStratBars(d);
   renderHeatmap(d);
+  renderActiveContracts(acct);
 }
 
 // ═══════════════════════════════════════
@@ -909,7 +1014,7 @@ buildForecastChart();
   const sections=[
     {id:'sec-overview',btn:'mn-overview'},
     {id:'sec-pnl',btn:'mn-pnl'},
-    {id:'sec-contracts',btn:'mn-contracts'},
+    {id:'sec-active',btn:'mn-contracts'},
     {id:'sec-forecast',btn:'mn-forecast'},
     {id:'sec-activity',btn:'mn-activity'}
   ];
@@ -923,7 +1028,6 @@ buildForecastChart();
     if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
     activateNav(btnId);
   };
-  // Highlight nav on scroll
   if('IntersectionObserver' in window){
     const obs=new IntersectionObserver(entries=>{
       entries.forEach(e=>{
@@ -946,14 +1050,14 @@ buildForecastChart();
   <button class="mn-btn" id="mn-pnl" onclick="mnScroll('sec-pnl','mn-pnl')">
     <span class="mn-ico">💰</span>P&amp;L
   </button>
-  <button class="mn-btn" id="mn-contracts" onclick="mnScroll('sec-contracts','mn-contracts')">
-    <span class="mn-ico">📅</span>Weekly
+  <button class="mn-btn" id="mn-contracts" onclick="mnScroll('sec-active','mn-contracts')">
+    <span class="mn-ico">📋</span>Positions
   </button>
   <button class="mn-btn" id="mn-forecast" onclick="mnScroll('sec-forecast','mn-forecast')">
     <span class="mn-ico">🎯</span>Forecast
   </button>
   <button class="mn-btn" id="mn-activity" onclick="mnScroll('sec-activity','mn-activity')">
-    <span class="mn-ico">📅</span>Activity
+    <span class="mn-ico">🗓</span>Activity
   </button>
 </nav>
 </body>
